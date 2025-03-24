@@ -10,17 +10,21 @@
 
 ##### Data Cleaning ######
 
+# install.packages("janitor") # If needed #
+library(janitor)
+
+# install.packages("openxlsx") # If needed #
+library(openxlsx)
+
+# install.packages("cli") #If needed #
+library(cli)
+
 ## Load necessary packages ##
 library(dplyr)
 library(tidyr)
 library(readxl)
 library(ggplot2)
 
-# install.packages("janitor") # If needed #
-library(janitor)
-
-# install.packages("openxlsx") # If needed #
-library(openxlsx)
 
 ## Read in the master "Inverts_2024" dataset ##
 master <- readxl::read_excel("C:/UCNZ/R/Invertebrates_2024/Invertebrates_2024_Data/Inverts_2024.xlsx")
@@ -41,7 +45,7 @@ light <- clean_names(light)
 
 ## Replace the blanks with zeros ## 
 pitfall[1:95, 6:50][is.na(pitfall[1:95, 6:50])] <- 0 
-pan[1:33, 6:48][is.na(pan[1:33, 6:48])] <- 0 
+pan[1:33, 6:41][is.na(pan[1:33, 6:41])] <- 0 
 
 ## Light is in a different format, so checking if the count column is string ##
 str(light)
@@ -52,7 +56,6 @@ light$abundance <- as.numeric(light$abundance)
 ## Replacing blanks or NAs with zeros ##
 light$abundance[is.na(light$abundance)] <- 0
 
-## I could merge them into one dataset, but Pitfall and Pan traps are in a different format than Light traps, so will circle back to that ##
 
 ## Transform pan to long format ##
 
@@ -237,6 +240,24 @@ long_pan <- long_pan %>%
 long_pan <- long_pan %>%
   mutate(phylum = ifelse(order == "stylommatophora", "mollusca", phylum))
 
+
+############### Code Pieces Repository/Workshop ######################
+
+
+##### Separating columns by taxonomic group #####
+#taxonomic_columns <- list(
+ # Order = c("coleoptera", "araneae", "orthoptera", "diptera", "hymenoptera", "lepidoptera", "opiliones", "lithobiomorpha", "stylommatophora", "neuroptera", "hemiptera", "amphipoda")
+
+
+##### Transform Pitfall and Pan to Long Format ##### Not ready for this as sheets are still mixed taxonomic group
+
+### Pitfall ###
+#long_pitfall <- pitfall%>%
+#  tidyr::pivot_longer(cols = -c(site_name, farm, region, trap_type, habitat_type), 
+#              names_to = "species", 
+#               value_to = "count")
+
+#print(long_pitfall)
 
 ##### Initial Summary Statistics #####
 
