@@ -236,7 +236,230 @@ long_pan <- long_pan %>%
 
 long_pan <- long_pan %>%
   mutate(phylum = ifelse(order == "stylommatophora", "mollusca", phylum))
+###### Pitfall Trap Cleaning ######
 
+
+## Transform pitfall to long format ##
+
+pitfall <- pitfall %>%
+  mutate(across(
+    -c("Site name", "Farm", "Region", "Trap Type", "Habitat Type"),  # keep these as-is
+    ~ suppressWarnings(as.numeric(.))
+  ))
+
+long_pitfall <- pitfall %>%
+  tidyr::pivot_longer(
+    cols = -c("Site name", "Farm", "Region", "Trap Type", "Habitat Type"),
+    names_to = "invert_type",
+    values_to = "abundance"
+  )
+
+long_pitfall <- long_pitfall %>%
+  mutate(
+    phylum = if(! "phylum" %in% names(.)) NA else phylum,
+    class = if (! "class" %in% names(.)) NA else class,
+    superorder = if (! "superorder" %in% names(.)) NA else superorder,
+    order = if (!"order" %in% names(.)) NA else order,
+    family = if (!"family" %in% names(.)) NA else family,
+    subfamily = if (! "subfamily" %in% names(.)) NA else subfamily,
+    tribe = if (!"tribe" %in% names(.)) NA else tribe,
+    genus = if (!"genus" %in% names(.)) NA else genus
+  ) %>%
+  relocate(phylum, .after = "Habitat Type") %>%
+  relocate(class, .after = phylum) %>%
+  relocate(superorder, .after = class) %>%
+  relocate(order, .after = superorder) %>%
+  relocate(family, .after = order) %>%
+  relocate(subfamily, .after = family)%>%
+  relocate(tribe, .after = subfamily) %>%
+  relocate(genus, .after = tribe)
+
+
+long_pitfall <- long_pitfall %>%                             # Renaming "invert type" to species
+  rename(species = invert_type)
+
+## Moving values from "species" into their correct taxonomic group columns ##
+
+# Moving values to order based on their character strings #
+long_pitfall <- long_pitfall %>%
+  mutate(
+    order = ifelse(species %in% c("Coleoptera", "Araneae", "Orthoptera", "Diptera", "Hymenoptera", "Lepidoptera", "Opiliones", "Lithobiomorpha", "Stylommatophora", "Neuroptera", "Hemiptera", "Amphipoda"), species, order),     # Move selected values
+    species = ifelse(species %in% c("Coleoptera", "Araneae", "Orthoptera", "Diptera", "Hymenoptera", "Lepidoptera", "Opiliones", "Lithobiomorpha", "Stylommatophora", "Neuroptera", "Hemiptera", "Amphipoda"), "NA", species)     # Replace with "NA"
+  )
+
+# Moving values to family #
+long_pitfall <- long_pitfall %>%
+  mutate(
+    family = ifelse(species %in% c("Carabidae", "Staphylininae", "Curculionidae", "Latridiidae", "Lynphiidae", "Chrysopidae", "Reduviidae"), species, family),  # Move selected values to family
+    species = ifelse(species %in% c("Carabidae", "Staphylininae", "Curculionidae", "Latridiidae", "Lynphiidae", "Chrysopidae", "Reduviidae"), "NA", species)    # Replace with "NA"
+  )
+
+# Correcting Staphylininae to Staphylinidae
+long_pitfall <- long_pitfall %>%
+  mutate(
+    family = str_replace_all(family, c(
+      "Staphylininae" = "Staphylinidae")))
+
+# Moving values to subfamily #
+long_pitfall <- long_pitfall %>%
+  mutate(
+    subfamily = ifelse(species %in% c("Harpalinae"), species, subfamily),
+    species = ifelse(species %in% c("Harpalinae"), "NA", species)
+  )
+
+# Moving values to tribe #
+long_pitfall <- long_pitfall %>% 
+  mutate(
+    tribe = ifelse(species %in% c("Stenolophini", "Pentagonicini", "Epuraeini"), species, tribe),
+    species = ifelse(species %in% c("Stenolophini", "Pentagonicini", "Epuraeini"), "NA", species)
+  )
+
+# Moving values to genus #
+long_pitfall <- long_pitfall %>%
+  mutate(
+    genus = ifelse(species %in% c("Sitona", "Mecodema", "Coccinella", "Anoteropsis", "Bobilla", "Megaselia", "Wiseana"), species, genus), 
+    species = ifelse(species %in% c("Sitona", "Mecodema", "Coccinella", "Anoteropsis", "Bobilla", "Megaselia", "Wiseana"), "NA", species)
+  )
+
+# Moving values to phylum and superorder #
+long_pitfall <- long_pitfall %>%
+  mutate(
+    phylum = ifelse(species %in% c("Annelid"), species, phylum),
+    species = ifelse(species %in% c("Annelid"), "NA", species)
+  )
+
+long_pitfall <- long_pitfall %>%
+  mutate(
+    superorder = ifelse(species %in% c("Mite", "Mites"), species, superorder),
+    species = ifelse(species %in% c("Mite", "Mites"), "NA", species)
+  )
+
+# Filling the higher taxonomic cells #
+long_pitfall <- long_pitfall %>%
+  mutate(phylum = coalesce(phylum, "Arthropoda"))  # filling all the NAs in with arthropoda
+
+
+long_pitfall <- long_pitfall %>%
+  mutate(phylum = recode(phylum, "Annelid" = "Annelida")) # editing annelid to be annelida
+
+long_pitfall <- long_pitfall %>%
+  mutate(
+    genus = case_when(
+      is.na(genus) & species == "Coccinella undecimpunctata" ~ "Coccinella",
+      is.na(genus) & species == "Cartodere_bifasciata" ~ "Cartodere",
+      is.na(genus) & species == "Peris_rapae" ~ "Pieris",                          # peris_rapae is spelled wrong, it should be pieris_rapae
+      is.na(genus) & species == "Oponga_omoscopa" ~ "Oponga",
+      is.na(genus) & species == "Notagonum submetallicum" ~ "Notagonum",
+      is.na(genus) & species == "Anisodactylus biontatus" ~ "Anisodactylus",
+      is.na(genus) & species == "Harpalus affinis" ~ "Harpalus",
+      is.na(genus) & species == "Mecodema moniliferum" ~ "Mecodema",
+      TRUE ~ genus
+    ),
+    
+    tribe = case_when(
+      is.na(tribe) & genus == "Coccinella" ~ "Coccinellini",
+      is.na(tribe) & genus == "Sitona" ~ "Sitonini",
+      is.na(tribe) & genus == "Cartodere" ~ "Cartoderini",
+      is.na(tribe) & genus == "Pieris" ~ "Pierini",
+      is.na(tribe) & genus == "Bobilla" ~ "Nemobiini",
+      is.na(tribe) & genus == "Notagonum" ~ "Platynini",
+      is.na(tribe) & genus == "Anisodactylus" ~ "Harpalini",
+      is.na(tribe) & genus == "Harpalus" ~ "Harpalini",
+      is.na(tribe) & genus == "Mecodema" ~ "Broscini",
+      TRUE ~ tribe
+    ), 
+    
+    subfamily = case_when(
+      is.na(subfamily) & tribe == "Coccinellini" ~ "Coccinellinae",
+      is.na(subfamily) & tribe == "Sitonini" ~ "Entiminae",
+      is.na(subfamily) & tribe == "Cartoderini" ~ "Latridiinae",
+      is.na(subfamily) & tribe == "Pierini" ~"Pierinae",
+      is.na(subfamily) & genus == "Oponga" ~ "Hieroxestinae",
+      is.na(subfamily) & tribe == "Stenolophini" ~ "Harpalinae",
+      is.na(subfamily) & tribe == "Pentagonicini" ~ "Harpalinae",
+      is.na(subfamily) & genus == "Anoteropsis" ~ "Artoriinae",
+      is.na(subfamily) & tribe == "Nemobiini" ~ "Nemobiinae",
+      is.na(subfamily) & genus == "Megaselia" ~ "Phorinae",
+      is.na(subfamily) & tribe == "Platynini" ~ "Platyninae",
+      is.na(subfamily) & tribe == "Harpalini" ~ "Harpalinae",
+      is.na(subfamily) & tribe == "Broscini" ~ "Broscinae",
+      TRUE ~ subfamily
+    ),
+    
+    family = case_when(                                                           
+      is.na(family) & subfamily == "Coccinellinae" ~ "Coccidellidae",                    
+      is.na(family) & subfamily == "Entiminae" ~ "Curculionidae",
+      is.na(family) & subfamily == "Latridiinae"~ "Latridiidae",
+      is.na(family) & subfamily == "Harpalinae" ~ "Carabidae",
+      is.na(family) & subfamily == "Pierinae" ~ "Pieridae",
+      is.na(family) & subfamily == "Hieroxestinae" ~ "Tineidae",
+      is.na(family) & subfamily == "Artoriinae" ~ "Lycosidae",
+      is.na(family) & subfamily == "Nemobiinae" ~ "Trigonidiidae",
+      is.na(family) & subfamily == "Phorinae" ~ "Phoridae",
+      is.na(family) & genus == "Wiseana" ~ "Hepialidae",
+      is.na(family) & subfamily == "Platyninae" ~ "Carabidae",
+      is.na(family) & subfamily == "Broscinae" ~ "Carabidae",
+      is.na(family) & tribe == "Epuraeini" ~ "Nitidulidae",
+      TRUE ~ family                                                               
+    ), 
+    
+    order = case_when(
+      family %in% c("Coccidellidae", "Curculionidae", "Latridiidae", "Carabidae", "Staphylinidae", "Nitidulidae") ~ "Coleoptera",
+      family %in% c("Pieridae", "Tineidae", "Hepialidae") ~ "Lepidoptera",
+      family %in% c("Lycosidae","Lynphiidae") ~ "Araneae",
+      family %in% c("Trigonidiidae") ~ "Orthoptera",
+      family %in% c("Phoridae") ~ "Diptera",
+      family %in% c("Chrysopidae") ~ "Neuroptera",
+      family %in% c("Reduviidae") ~ "Hemiptera",
+      TRUE ~ order
+    ),
+    
+    superorder = case_when(
+      order %in% c("Amphipoda") ~ "Peracarida",
+      order %in% c("Coleoptera", "Lepidoptera", "Diptera", "Hymenoptera") ~ "Endopterygota",
+      order %in% c("Opiliones") ~ "Parasitiformes",
+      order %in% c("Neuroptera") ~ "Neuropterida",
+      order %in% c("Hemiptera") ~ "Codylognatha",
+      order %in% c("Orthoptera") ~ "Orthopterida",
+      TRUE ~ superorder
+    ),
+    
+    class = case_when(
+      order %in% c("Coleoptera", "Lepidoptera", "Orthoptera", "Diptera", "Neuroptera", "Hemiptera", "Hymenoptera") ~ "Insecta",
+      order %in% c("Araneae", "Opiliones") ~ "Arachnida",
+      superorder %in% c("Mite", "Mites") ~ "Arachnida",
+      order %in% c("Amphipoda") ~ "Malacostraca",
+      order %in% c("Lithobiomorpha") ~ "Chilopoda",
+      order %in% c("Stylommatophora") ~ "Gastropoda",
+      TRUE ~ class
+    ),
+    
+    phylum = case_when(
+      order %in% c("Stylommatophora") ~ "Mollusca",
+      TRUE ~ phylum
+    )
+  )
+
+
+
+
+############### Code Pieces Repository/Workshop ######################
+
+
+##### Separating columns by taxonomic group #####
+#taxonomic_columns <- list(
+ # Order = c("coleoptera", "araneae", "orthoptera", "diptera", "hymenoptera", "lepidoptera", "opiliones", "lithobiomorpha", "stylommatophora", "neuroptera", "hemiptera", "amphipoda")
+
+
+##### Transform Pitfall and Pan to Long Format ##### Not ready for this as sheets are still mixed taxonomic group
+
+### Pitfall ###
+#long_pitfall <- pitfall%>%
+#  tidyr::pivot_longer(cols = -c(site_name, farm, region, trap_type, habitat_type), 
+#              names_to = "species", 
+#               value_to = "count")
+
+#print(long_pitfall)
 
 ##### Initial Summary Statistics #####
 
