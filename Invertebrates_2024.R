@@ -8,19 +8,26 @@
 
 ###############################################################################################
 
+##########################
 ##### Data Cleaning ######
-
-## Load necessary packages ##
-library(dplyr)
-library(tidyr)
-library(readxl)
-library(ggplot2)
+##########################
 
 # install.packages("janitor") # If needed #
 library(janitor)
 
 # install.packages("openxlsx") # If needed #
 library(openxlsx)
+
+# install.packages("cli") #If needed #
+library(cli)
+
+## Load necessary packages ##
+library(dplyr)
+library(tidyr)
+library(readxl)
+library(ggplot2)
+library(stringr)
+
 
 ## Read in the master "Inverts_2024" dataset ##
 master <- readxl::read_excel("C:/UCNZ/R/Invertebrates_2024/Invertebrates_2024_Data/Inverts_2024.xlsx")
@@ -41,7 +48,7 @@ light <- clean_names(light)
 
 ## Replace the blanks with zeros ## 
 pitfall[1:95, 6:50][is.na(pitfall[1:95, 6:50])] <- 0 
-pan[1:33, 6:48][is.na(pan[1:33, 6:48])] <- 0 
+pan[1:33, 6:41][is.na(pan[1:33, 6:41])] <- 0 
 
 ## Light is in a different format, so checking if the count column is string ##
 str(light)
@@ -52,7 +59,6 @@ light$abundance <- as.numeric(light$abundance)
 ## Replacing blanks or NAs with zeros ##
 light$abundance[is.na(light$abundance)] <- 0
 
-## I could merge them into one dataset, but Pitfall and Pan traps are in a different format than Light traps, so will circle back to that ##
 
 ## Transform pan to long format ##
 
@@ -234,9 +240,222 @@ long_pan <- long_pan %>%
     )
   )
 
-long_pan <- long_pan %>%
-  mutate(phylum = ifelse(order == "stylommatophora", "mollusca", phylum))
+## Adding taxonomic columns to match long_pan ##
 
+light <- light %>%
+  mutate(
+    phylum = if(! "phylum" %in% names(.)) NA else phylum,
+    class = if (! "class" %in% names(.)) NA else class,
+    superorder = if (! "superorder" %in% names(.)) NA else superorder,
+    order = if (!"order" %in% names(.)) NA else order,
+    family = if (!"family" %in% names(.)) NA else family,
+    subfamily = if (! "subfamily" %in% names(.)) NA else subfamily,
+    tribe = if (!"tribe" %in% names(.)) NA else tribe,
+    genus = if (!"genus" %in% names(.)) NA else genus
+  ) %>%
+  relocate(phylum, .after = date) %>%
+  relocate(class, .after = phylum) %>%
+  relocate(superorder, .after = class) %>%
+  relocate(order, .after = superorder) %>%
+  relocate(family, .after = order) %>%
+  relocate(subfamily, .after = family)%>%
+  relocate(tribe, .after = subfamily) %>%
+  relocate(genus, .after = tribe)
+
+## Filling in taxonomic values for light trap datasheet ##
+
+light <- light %>%
+  mutate(phylum = coalesce(phylum, "arthropoda")) # filling all the NAs in with arthropoda
+
+light <- light %>%
+  mutate(class = coalesce(class, "insecta"))
+
+## Changing "rove" to staphylinidae and other small corrections ##
+light <- light %>%
+  mutate(species = ifelse(species == "Rove", "staphylinidae", species),         # Replace "Rove" with staphylinidae in species column
+         family = ifelse(species == "staphylinidae", "staphylinidae", family),  # Move staphylinidae to family column
+         species = ifelse(species == "staphylinidae", NA, species))             # Replace staphylinidae with NA
+
+light <- light %>%
+  mutate(species =ifelse(species == "	Diving Beelte", "dytiscidae", species),
+         family = ifelse(species == "dytiscidae", "dytiscidae", family),
+         species = ifelse(species == "dytiscidae", NA, species))
+
+# Moving values to genus #
+light <- light %>%
+  mutate(
+    genus = ifelse(species %in% c("Pseudocoremia", "Odontria", "Amblyptilia", "Capua"), species, genus), 
+    species = ifelse(species %in% c("Pseudocoremia", "Odontria", "Amblyptilia", "Capua"), "NA", species))
+
+# Moving values to family #
+light <- light %>%
+  mutate(
+    family = ifelse(species %in% c("Geometridae", "Crambidae"), species, family),
+    species = ifelse(species %in% c("Geometridae", "Crambidae"), "NA", species)
+  )
+
+light <- light %>%
+  mutate(
+    genus = case_when(
+      is.na(genus) & species == "Epyaxa rosearia" ~ "epyaxa",
+      is.na(genus) & species == "Orocrambus flexuosellus" ~ "orocrambus",
+      is.na(genus) & species == "Eudonia submarginalis" ~ "eudonia",
+      is.na(genus) & species == "Forficula auricularia" ~ "forficula",
+      is.na(genus) & species == "Acrossidius tasmaniae" ~ "acrossidius",
+      is.na(genus) & species == "Hygraula nitens" ~ "hygraula",
+      is.na(genus) & species == "Chloroclystis inductata" ~ "chloroclystis",
+      is.na(genus) & species == "Netelia ephippiata" ~ "netelia",
+      is.na(genus) & species == "Hydriomena deltoidata" ~ "hydriomena",
+      is.na(genus) & species == "Xanthorhoe semifissata" ~ "xanthorhoe",
+
+      TRUE ~ genus
+    ),
+    
+    tribe = case_when(
+      is.na(tribe) & genus == "Pseudocoremia" ~ "boarmiini",
+      is.na(tribe) & genus == "epyaxa" ~ "xanthorhoini",
+      is.na(tribe) & genus == "orocrambus" ~ "crambini",
+      is.na(tribe) & genus == "Odontria" ~ "liparetrini",
+      is.na(tribe) & genus == "forficula" ~ "forficulini",
+      is.na(tribe) & genus == "Amblyptilia" ~ "platyptiliini",
+      is.na(tribe) & genus == "acrossidius" ~ "aphodiini",
+      is.na(tribe) & genus == "Capua" ~ "archipini",
+      TRUE ~ tribe
+    ), 
+    
+    subfamily = case_when(
+      is.na(subfamily) & tribe == "boarmiini" ~ "ennominae",
+      is.na(subfamily) & tribe == "xanthorhoini" ~ "larentiinae",
+      is.na(subfamily) & tribe == "crambini" ~ "crambinae",
+      is.na(subfamily) & tribe == "liparetrini" ~ "melolonthinae",
+      is.na(subfamily) & genus == "scopariinae" ~ "crambinae",
+      is.na(subfamily) & tribe == "forficulini" ~ "forficulinae",
+      is.na(subfamily) & tribe == "aphodiini" ~ "aphodiinae",
+      is.na(subfamily) & tribe == "archipini" ~ "tortricinae",
+      TRUE ~ subfamily
+    ),
+    
+    family = case_when(                                                           
+      is.na(family) & subfamily == "ennominae" ~ "geometridae",                    
+      is.na(family) & subfamily == "larentiinae" ~ "geometridae",
+      is.na(family) & subfamily == "crambinae"~ "crambidae",
+      is.na(family) & subfamily == "melolonthinae"~ "scarabaeidae",
+      is.na(family) & subfamily == "forficulinae" ~"forficulidae",
+      is.na(family) & tribe == "platyptiliini" ~ "pterophoridae",
+      is.na(family) & genus == "eudonia" ~ "crambidae",
+      is.na(family) & subfamily == "aphodiinae" ~ "scarabaeidae",
+      is.na(family) & genus == "hygraula" ~ "crambidae",
+      is.na(family) & subfamily == "tortricinae" ~ "tortricidae",
+      is.na(family) & genus == "chloroclystis" ~ "geometridae",
+      is.na(family) & genus == "Wisiena" ~ "hepialidae",   #Wisiena spelled differently in pan trap sheet
+      is.na(family) & genus == "netelia" ~ "ichneumonidae",
+      is.na(family) & genus == "hydriomena" ~ "geometridae",
+      is.na(family) & genus == "xanthorhoe" ~ "geometridae",
+      TRUE ~ family                                                               
+    ), 
+    
+        superorder = case_when(
+      order %in% c("coleoptera", "lepidoptera", "diptera", "hymenoptera") ~ "endopterygota",
+      order %in% c("opiliones") ~ "parasitiformes",
+      order %in% c("neuroptera") ~ "neuropterida",
+      order %in% c("hemiptera") ~ "codylognatha",
+      order %in% c("orthoptera") ~ "orthopterida",
+      TRUE ~ superorder
+    ),
+  )
+
+
+light <- light %>%
+  mutate(
+    order = str_replace_all(order, c(
+      "Coleopetera" = "Coleoptera",
+      "Coleoptera" = "Coleoptera",
+      "Coleotpera" = "Coleoptera",
+      "coleoptera" = "Coleoptera"
+    ))
+  )
+
+light <- light %>%
+  mutate(
+    order = str_replace_all(order, c(
+      "Hymenotpera" = "Hymenoptera"))
+  )
+
+light <- light %>%
+  mutate(
+    order = str_replace_all(order, c(
+      "Lepidopera" = "Lepidoptera"))
+  )
+
+## Save light and long_pan into new excel copies ##
+
+
+######################################################
+##### Initial Pan and Light Trap Data Exploring ######
+#####################################################
+
+## Summarize by order and habitat type ##
+light_summary <- light %>%
+  group_by(location, order) %>%    # Group by habitat type and order
+  summarize(TotalAbundance =sum(abundance))  # Sum abundance within each group
+
+ggplot(light_summary, aes(x = location, y = TotalAbundance, fill = order)) +
+  geom_bar(stat = "identity", position = "dodge") + # Use position = "dodge" for grouped bars
+  labs(
+    title = "Light Trap Insect Abundance by Order and Habitat Type",
+    x = "Habitat Type",
+    y = "Total Abundance"
+  ) +
+  theme_minimal()
+
+pan_summary <- long_pan %>%
+  mutate(abundance = replace_na(abundance, 0))
+
+pan_summary <- pan_summary %>%
+  group_by(habitat_type, order) %>%    # Group by habitat type and order
+  summarize(TotalAbundance =sum(abundance))  # Sum abundance within each group
+
+ggplot(pan_summary, aes(x = habitat_type, y = TotalAbundance, fill = order)) +
+  geom_bar(stat = "identity", position = "dodge") + # Use position = "dodge" for grouped bars
+  labs(
+    title = "Pan Trap Insect Abundance by Order and Habitat Type",
+    x = "Habitat Type",
+    y = "Total Abundance"
+  ) +
+  theme_minimal()
+
+### Plot diversity ###
+
+## Calculate order diversity ##
+pan_richness <- long_pan %>%
+  group_by(habitat_type) %>%
+  summarize(OrderRichness = n_distinct(order))  # Count unique orders
+
+light_richness <- light %>%
+  group_by(location) %>%
+  summarize(OrderRichness = n_distinct(order))
+
+
+
+
+
+############### Code Pieces Repository/Workshop ######################
+
+
+##### Separating columns by taxonomic group #####
+#taxonomic_columns <- list(
+ # Order = c("coleoptera", "araneae", "orthoptera", "diptera", "hymenoptera", "lepidoptera", "opiliones", "lithobiomorpha", "stylommatophora", "neuroptera", "hemiptera", "amphipoda")
+
+
+##### Transform Pitfall and Pan to Long Format ##### Not ready for this as sheets are still mixed taxonomic group
+
+### Pitfall ###
+#long_pitfall <- pitfall%>%
+#  tidyr::pivot_longer(cols = -c(site_name, farm, region, trap_type, habitat_type), 
+#              names_to = "species", 
+#               value_to = "count")
+
+#print(long_pitfall)
 
 ##### Initial Summary Statistics #####
 
