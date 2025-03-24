@@ -54,6 +54,189 @@ light$abundance[is.na(light$abundance)] <- 0
 
 ## I could merge them into one dataset, but Pitfall and Pan traps are in a different format than Light traps, so will circle back to that ##
 
+## Transform pan to long format ##
+
+long_pan <- pan %>%
+    tidyr::pivot_longer(cols = -c(site_name, farm, region, trap_type, habitat_type), 
+               names_to = "invert_type", 
+               values_to = "abundance")
+
+## Add a columns for order, family, tribe, and genus. This code can be updated for any additional columns that need to be added without overwriting the values that have been moved ##
+
+long_pan <- long_pan %>%
+  mutate(
+    phylum = if(! "phylum" %in% names(.)) NA else phylum,
+    class = if (! "class" %in% names(.)) NA else class,
+    superorder = if (! "superorder" %in% names(.)) NA else superorder,
+    order = if (!"order" %in% names(.)) NA else order,
+    family = if (!"family" %in% names(.)) NA else family,
+    subfamily = if (! "subfamily" %in% names(.)) NA else subfamily,
+    tribe = if (!"tribe" %in% names(.)) NA else tribe,
+    genus = if (!"genus" %in% names(.)) NA else genus
+  ) %>%
+  relocate(phylum, .after = habitat_type) %>%
+  relocate(class, .after = phylum) %>%
+  relocate(superorder, .after = class) %>%
+  relocate(order, .after = superorder) %>%
+  relocate(family, .after = order) %>%
+  relocate(subfamily, .after = family)%>%
+  relocate(tribe, .after = subfamily) %>%
+  relocate(genus, .after = tribe)
+
+long_pan <- long_pan %>%                             # Renaming "invert type" to species
+  rename(species = invert_type)
+
+# Correcting invert name spelling
+
+
+## Moving values from "species" into their correct taxonomic group columns ##
+
+# Moving values to order based on their character strings #
+long_pan <- long_pan %>%
+  mutate(
+    order = ifelse(species %in% c("coleoptera", "araneae", "orthoptera", "diptera", "hymenoptera", "lepidoptera", "opiliones", "lithobiomorpha", "stylommatophora", "neuroptera", "hemiptera", "amphipoda"), species, order),     # Move selected values
+    species = ifelse(species %in% c("coleoptera", "araneae", "orthoptera", "diptera", "hymenoptera", "lepidoptera", "opiliones", "lithobiomorpha", "stylommatophora", "neuroptera", "hemiptera", "amphipoda"), "NA", species)     # Replace with "NA"
+  )
+
+# Moving values to family #
+long_pan <- long_pan %>%
+  mutate(
+    family = ifelse(species %in% c("carabidae", "staphylinidae", "curculionidae", "latridiidae", "lynphiidae", "chrysopidae", "reduviidae"), species, family),  # Move selected values to family
+    species = ifelse(species %in% c("carabidae", "staphylinidae", "curculionidae", "latridiidae", "lynphiidae", "chrysopidae", "reduviidae"), "NA", species)    # Replace with "NA"
+  )
+
+# Moving values to subfamily #
+long_pan <- long_pan %>%
+  mutate(
+    subfamily = ifelse(species %in% c("harpalinae"), species, subfamily),
+    species = ifelse(species %in% c("harpalinae"), "NA", species)
+  )
+
+# Moving values to tribe #
+long_pan <- long_pan %>% 
+  mutate(
+    tribe = ifelse(species %in% c("stenolophini", "pentagonicini"), species, tribe),
+    species = ifelse(species %in% c("stenolophini", "pentagonicini"), "NA", species)
+  )
+
+# Moving values to genus #
+long_pan <- long_pan %>%
+  mutate(
+    genus = ifelse(species %in% c("sitona", "coccinella", "anoteropsis", "bobilla", "megaselia", "wiseana"), species, genus), 
+    species = ifelse(species %in% c("sitona", "coccinella", "anoteropsis", "bobilla", "megaselia", "wiseana"), "NA", species)
+  )
+
+# Moving values to phylum and superorder #
+long_pan <- long_pan %>%
+  mutate(
+    phylum = ifelse(species %in% c("annelid"), species, phylum),
+    species = ifelse(species %in% c("annelid"), "NA", species)
+  )
+
+long_pan <- long_pan %>%
+  mutate(
+    superorder = ifelse(species %in% c("mite", "mites"), species, superorder),
+    species = ifelse(species %in% c("mite", "mites"), "NA", species)
+  )
+
+# Filling the higher taxonomic cells #
+long_pan <- long_pan %>%
+  mutate(phylum = coalesce(phylum, "arthropoda"))  # filling all the NAs in with arthropoda
+
+
+long_pan <- long_pan %>%
+  mutate(phylum = recode(phylum, "annelid" = "annelida")) # editing annelid to be annelida
+
+
+# Using case_when to make multiple condition based assignments, more flexible than #ifelse, if family is NA and [species] is a specific value, it fills the missing column with the corresponding value, if no conditions are met, it keeps the existing value
+
+long_pan <- long_pan %>%
+  mutate(
+    genus = case_when(
+      is.na(genus) & species == "coccinella_undecimpunctata" ~ "coccinella",
+      is.na(genus) & species == "cartodere_bifasciata" ~ "cartodere",
+      is.na(genus) & species == "peris_rapae" ~ "pieris",                          # peris_rapae is spelled wrong, it should be pieris_rapae
+      is.na(genus) & species == "oponga_omoscopa" ~ "oponga",
+      TRUE ~ genus
+    ),
+    
+    tribe = case_when(
+      is.na(tribe) & genus == "coccinella" ~ "coccinellini",
+      is.na(tribe) & genus == "sitona" ~ "sitonini",
+      is.na(tribe) & genus == "cartodere" ~ "cartoderini",
+      is.na(tribe) & genus == "pieris" ~ "pierini",
+      is.na(tribe) & genus == "bobilla" ~ "nemobiini",
+      TRUE ~ tribe
+    ), 
+    
+    subfamily = case_when(
+      is.na(subfamily) & tribe == "coccinellini" ~ "coccinellinae",
+      is.na(subfamily) & tribe == "sitonini" ~ "entiminae",
+      is.na(subfamily) & tribe == "cartoderini" ~ "latridiinae",
+      is.na(subfamily) & tribe == "pierini" ~"pierinae",
+      is.na(subfamily) & genus == "oponga" ~ "hieroxestinae",
+      is.na(subfamily) & tribe == "stenolophini" ~ "harpalinae",
+      is.na(subfamily) & tribe == "pentagonicini" ~ "harpalinae",
+      is.na(subfamily) & genus == "anoteropsis" ~ "artoriinae",
+      is.na(subfamily) & tribe == "nemobiini" ~ "nemobiinae",
+      is.na(subfamily) & genus == "megaselia" ~ "phorinae",
+      TRUE ~ subfamily
+      ),
+      
+    family = case_when(                                                           
+      is.na(family) & subfamily == "coccinellinae" ~ "coccidellidae",                    
+      is.na(family) & subfamily == "entiminae" ~ "curculionidae",
+      is.na(family) & subfamily == "latridiinae"~ "latridiidae",
+      is.na(family) & subfamily == "harpalinae" ~ "carabidae",
+      is.na(family) & subfamily == "pierinae" ~ "pieridae",
+      is.na(family) & subfamily == "hieroxestinae" ~ "tineidae",
+      is.na(family) & subfamily == "artoriinae" ~ "lycosidae",
+      is.na(family) & subfamily == "nemobiinae" ~ "trigonidiidae",
+      is.na(family) & subfamily == "phorinae" ~ "phoridae",
+      is.na(family) & genus == "wiseana" ~ "hepialidae",
+      TRUE ~ family                                                               
+    ), 
+    
+    order = case_when(
+      family %in% c("coccidellidae", "curculionidae", "latridiidae", "carabidae", "staphylinidae") ~ "coleoptera",
+      family %in% c("pieridae", "tineidae", "hepialidae") ~ "lepidoptera",
+      family %in% c("lycosidae","lynphiidae") ~ "araneae",
+      family %in% c("trigonidiidae") ~ "orthoptera",
+      family %in% c("phoridae") ~ "diptera",
+      family %in% c("chrysopidae") ~ "neuroptera",
+      family %in% c("reduviidae") ~ "hemiptera",
+      TRUE ~ order
+    ),
+    
+    superorder = case_when(
+      order %in% c("amphipoda") ~ "peracarida",
+      order %in% c("coleoptera", "lepidoptera", "diptera", "hymenoptera") ~ "endopterygota",
+      order %in% c("opiliones") ~ "parasitiformes",
+      order %in% c("neuroptera") ~ "neuropterida",
+      order %in% c("hemiptera") ~ "codylognatha",
+      order %in% c("orthoptera") ~ "orthopterida",
+      TRUE ~ superorder
+    ),
+    
+    class = case_when(
+      order %in% c("coleoptera", "lepidoptera", "orthoptera", "diptera", "neuroptera", "hemiptera", "hymenoptera") ~ "insecta",
+      order %in% c("araneae", "opiliones") ~ "arachnida",
+      superorder %in% c("mite", "mites") ~ "arachnida",
+      order %in% c("amphipoda") ~ "malacostraca",
+      order %in% c("lithobiomorpha") ~ "chilopoda",
+      order %in% c("stylommatophora") ~ "gastropoda",
+      TRUE ~ class
+    ),
+    
+    phylum = case_when(
+      order %in% c("stylommatophora") ~ "mollusca",
+      TRUE ~ phylum
+    )
+  )
+
+long_pan <- long_pan %>%
+  mutate(phylum = ifelse(order == "stylommatophora", "mollusca", phylum))
+
 
 ##### Initial Summary Statistics #####
 
