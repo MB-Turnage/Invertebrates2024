@@ -21,6 +21,9 @@ library(openxlsx)
 # install.packages("cli") #If needed #
 library(cli)
 
+# install.packages("writexl")
+library(writexl)
+
 ## Load necessary packages ##
 library(dplyr)
 library(tidyr)
@@ -48,7 +51,7 @@ light <- clean_names(light)
 
 ## Replace the blanks with zeros ## 
 pitfall[1:95, 6:50][is.na(pitfall[1:95, 6:50])] <- 0 
-pan[1:33, 6:41][is.na(pan[1:33, 6:41])] <- 0 
+pan[1:33, 6:39][is.na(pan[1:33, 6:39])] <- 0 
 
 ## Light is in a different format, so checking if the count column is string ##
 str(light)
@@ -384,7 +387,6 @@ light <- light %>%
       "Lepidopera" = "Lepidoptera"))
   )
 
-## Save light and long_pan into new excel copies ##
 
 
 ######################################################
@@ -545,6 +547,8 @@ long_pitfall <- long_pitfall %>%
       "Slater" = "Porcellio scaber")))
 
 
+
+
 ## Moving values to order based on their character strings ##
 long_pitfall <- long_pitfall %>%
   mutate(
@@ -555,15 +559,15 @@ long_pitfall <- long_pitfall %>%
 # Moving values to family #
 long_pitfall <- long_pitfall %>%
   mutate(
-    family = ifelse(species %in% c("Carabidae", "Talitridae", "Sciaridae", "Miridae", "Cicadellidae", "Aphidae", "Tetragnathidae", "Gnphosidae", "Theridiidae", "Salticidae", "Lycosidae",  "Anthicidae", "Cerambycidae", "Staphylininae", "Curculionidae", "Latridiidae", "Lynphiidae", "Chrysopidae", "Reduviidae", "Henicopidae", "Ichneumonioidea", "Tineidae", "Muscidae", "Proctotrupidae"), species, family),  # Move selected values to family
-    species = ifelse(species %in% c("Carabidae", "Talitridae", "Sciaridae", "Miridae", "Cicadellidae", "Aphidae", "Tetragnathidae", "Gnphosidae", "Theridiidae", "Salticidae", "Lycosidae",  "Anthicidae", "Cerambycidae",  "Staphylininae", "Curculionidae", "Latridiidae", "Lynphiidae", "Chrysopidae", "Reduviidae", "Henicopidae", "Ichneumonioidea", "Tineidae", "Muscidae", "Proctotrupidae"), "NA", species))    # Replace with "NA" 
+    family = ifelse(species %in% c("Carabidae", "Talitridae", "Sciaridae", "Miridae", "Cicadellidae", "Aphidae", "Tetragnathidae", "Gnphosidae", "Theridiidae", "Salticidae", "Lycosidae",  "Anthicidae", "Cerambycidae", "Curculionidae", "Latridiidae", "Lynphiidae", "Chrysopidae", "Reduviidae", "Henicopidae", "Ichneumonioidea", "Tineidae", "Muscidae", "Proctotrupidae"), species, family),  # Move selected values to family
+    species = ifelse(species %in% c("Carabidae", "Talitridae", "Sciaridae", "Miridae", "Cicadellidae", "Aphidae", "Tetragnathidae", "Gnphosidae", "Theridiidae", "Salticidae", "Lycosidae",  "Anthicidae", "Cerambycidae", "Curculionidae", "Latridiidae", "Lynphiidae", "Chrysopidae", "Reduviidae", "Henicopidae", "Ichneumonioidea", "Tineidae", "Muscidae", "Proctotrupidae"), "NA", species))    # Replace with "NA" 
 
 
 # Moving values to subfamily #
 long_pitfall <- long_pitfall %>%
   mutate(
-    subfamily = ifelse(species %in% c("Harpalinae", "Deltocephalinae", "Orsillinae"), species, subfamily),
-    species = ifelse(species %in% c("Harpalinae", "Deltocephalinae", "Orsillinae"), "NA", species)
+    subfamily = ifelse(species %in% c("Harpalinae", "Deltocephalinae", "Orsillinae", "Staphylininae"), species, subfamily),
+    species = ifelse(species %in% c("Harpalinae", "Deltocephalinae", "Orsillinae", "Staphylininae"), "NA", species)
   )
 
 # Moving values to tribe #
@@ -671,6 +675,7 @@ long_pitfall <- long_pitfall %>%
       is.na(tribe) & genus == "Pleioplectron" ~ "Macropathini",
       is.na(tribe) & genus == "Orocrambus" ~ "Crambini",
       is.na(tribe) & genus == "Ophyiulus" ~ "Leptoiulini",
+      is.na(tribe) & genus == "Monocrepidius" ~ "Oophorini",
       TRUE ~ tribe
     ), 
     
@@ -689,7 +694,7 @@ long_pitfall <- long_pitfall %>%
       is.na(subfamily) & tribe == "Harpalini" ~ "Harpalinae",
       is.na(subfamily) & tribe == "Broscini" ~ "Broscinae",
       is.na(subfamily) & tribe == "Aphodiini" ~ "Aphodiinae",
-      is.na(subfamily) & genus == "Monocrepidius" ~ "Agrypninae",
+      is.na(subfamily) & genus == "Oophorini" ~ "Agrypninae",
       is.na(subfamily) & tribe == "Dorcadiini" ~ "Lamiinae",
       is.na(subfamily) & tribe == "Tropiphorini" ~ "Entiminae",
       is.na(subfamily) & tribe == "Otiorhynchini" ~ "Entiminae", 
@@ -716,6 +721,7 @@ long_pitfall <- long_pitfall %>%
       is.na(subfamily) & genus == "Nuncia" ~ "Triaenonychinae",
       is.na(subfamily) & genus == "Nelima" ~ "Leiobuninae", 
       is.na(subfamily) & tribe == "Leptoiulini" ~ "Julinae",
+      is.na(subfamily) & tribe == "Epuraeini" ~ "Epuraeinae",
       TRUE ~ subfamily
     ),
     
@@ -732,7 +738,7 @@ long_pitfall <- long_pitfall %>%
       is.na(family) & genus == "Wiseana" ~ "Hepialidae",
       is.na(family) & subfamily == "Platyninae" ~ "Carabidae",
       is.na(family) & subfamily == "Broscinae" ~ "Carabidae",
-      is.na(family) & tribe == "Epuraeini" ~ "Nitidulidae",
+      is.na(family) & subfamily == "Epuraeinae" ~ "Nitidulidae",
       is.na(family) & tribe == "Parmenini" ~ "Cerambycidae",
       is.na(family) & subfamily == "Aphodiinae" ~ "Scarabaeidae",
       is.na(family) & subfamily == "Agrypninae" ~ "Elateridae",
@@ -763,6 +769,7 @@ long_pitfall <- long_pitfall %>%
       is.na(family) & subfamily == "Leiobuninae" ~ "Sclerosomatidae",
       is.na(family) & subfamily == "Julinae" ~ "Julidae",
       is.na(family) & genus == "Porcellio" ~ "Porcellionidae",
+      is.na(family) & subfamily == "Staphylininae" ~ "Staphylinidae",
       TRUE ~ family                                                               
     ), 
     
@@ -814,8 +821,16 @@ long_pitfall <- long_pitfall %>%
     )
   )
 
+## Save long_pitfall and long_pan into .xlsx files ##
+my_list <- list(
+  long_pitfall = long_pitfall,
+  long_pan = long_pan,
+  light = light
+)
 
+write_xlsx(my_list, "C:\\UCNZ\\R\\Invertebrates_2024\\Invertebrates_2024_Data\\Invert_Data_R_Version.xlsx")
 
+### START TOMORROW BY TRYING FAMILY DIVERSITY - Make new branch ###
 
 ############### Code Pieces Repository/Workshop ######################
 
