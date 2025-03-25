@@ -59,6 +59,7 @@ light$abundance <- as.numeric(light$abundance)
 ## Replacing blanks or NAs with zeros ##
 light$abundance[is.na(light$abundance)] <- 0
 
+###### Pan Trap Data Cleaning #######
 
 ## Transform pan to long format ##
 
@@ -237,6 +238,8 @@ long_pan <- long_pan %>%
     )
   )
 
+###### Light Traps Data Cleaning #####
+
 ## Adding taxonomic columns to match long_pan ##
 
 light <- light %>%
@@ -383,54 +386,6 @@ light <- light %>%
     order = str_replace_all(order, c(
       "Lepidopera" = "Lepidoptera"))
   )
-
-## Save light and long_pan into new excel copies ##
-
-
-######################################################
-##### Initial Pan and Light Trap Data Exploring ######
-#####################################################
-
-## Summarize by order and habitat type ##
-light_summary <- light %>%
-  group_by(location, order) %>%    # Group by habitat type and order
-  summarize(TotalAbundance =sum(abundance))  # Sum abundance within each group
-
-ggplot(light_summary, aes(x = location, y = TotalAbundance, fill = order)) +
-  geom_bar(stat = "identity", position = "dodge") + # Use position = "dodge" for grouped bars
-  labs(
-    title = "Light Trap Insect Abundance by Order and Habitat Type",
-    x = "Habitat Type",
-    y = "Total Abundance"
-  ) +
-  theme_minimal()
-
-pan_summary <- long_pan %>%
-  mutate(abundance = replace_na(abundance, 0))
-
-pan_summary <- pan_summary %>%
-  group_by(habitat_type, order) %>%    # Group by habitat type and order
-  summarize(TotalAbundance =sum(abundance))  # Sum abundance within each group
-
-ggplot(pan_summary, aes(x = habitat_type, y = TotalAbundance, fill = order)) +
-  geom_bar(stat = "identity", position = "dodge") + # Use position = "dodge" for grouped bars
-  labs(
-    title = "Pan Trap Insect Abundance by Order and Habitat Type",
-    x = "Habitat Type",
-    y = "Total Abundance"
-  ) +
-  theme_minimal()
-
-### Plot diversity ###
-
-## Calculate order diversity ##
-pan_richness <- long_pan %>%
-  group_by(habitat_type) %>%
-  summarize(OrderRichness = n_distinct(order))  # Count unique orders
-
-light_richness <- light %>%
-  group_by(location) %>%
-  summarize(OrderRichness = n_distinct(order))
 
 
 ###### Pitfall Trap Cleaning ######
@@ -814,15 +769,80 @@ long_pitfall <- long_pitfall %>%
     )
   )
 
+## Save long_pitfall and long_pan into .xlsx files ##
+my_list <- list(
+  long_pitfall = long_pitfall,
+  long_pan = long_pan,
+  light = light
+)
+
+write_xlsx(my_list, "C:\\UCNZ\\R\\Invertebrates_2024\\Invertebrates_2024_Data\\Invert_Data_R_Version.xlsx")
+
+######################################################
+##### Initial Pan and Light Trap Data Exploring ######
+#####################################################
+
+## Summarize by order and habitat type ##
+light_summary <- light %>%
+  group_by(location, order) %>%    # Group by habitat type and order
+  summarize(TotalAbundance =sum(abundance))  # Sum abundance within each group
+
+ggplot(light_summary, aes(x = location, y = TotalAbundance, fill = order)) +
+  geom_bar(stat = "identity", position = "dodge") + # Use position = "dodge" for grouped bars
+  labs(
+    title = "Light Trap Insect Abundance by Order and Habitat Type",
+    x = "Habitat Type",
+    y = "Total Abundance"
+  ) +
+  theme_minimal()
+
+pan_summary <- long_pan %>%
+  mutate(abundance = replace_na(abundance, 0))
+
+pan_summary <- pan_summary %>%
+  group_by(habitat_type, order) %>%    # Group by habitat type and order
+  summarize(TotalAbundance =sum(abundance))  # Sum abundance within each group
+
+ggplot(pan_summary, aes(x = habitat_type, y = TotalAbundance, fill = order)) +
+  geom_bar(stat = "identity", position = "dodge") + # Use position = "dodge" for grouped bars
+  labs(
+    title = "Pan Trap Insect Abundance by Order and Habitat Type",
+    x = "Habitat Type",
+    y = "Total Abundance"
+  ) +
+  theme_minimal()
+
+pitfall_summary <- long_pitfall %>%
+  group_by(`Habitat Type`, order) %>%    # Group by habitat type and order
+  summarize(TotalAbundance =sum(abundance, na.rm = TRUE))  # Sum abundance within each group
+
+ggplot(pitfall_summary, aes(x = `Habitat Type`, y = TotalAbundance, fill = order)) +
+  geom_bar(stat = "identity", position = "dodge") + # Use position = "dodge" for grouped bars
+  labs(
+    title = "Pitfall Trap Insect Abundance by Order and Habitat Type",
+    x = "Habitat Type",
+    y = "Total Abundance"
+  ) +
+  theme_minimal()
+
+### Plot diversity ###
+
+## Calculate order diversity ##
+pan_richness <- long_pan %>%
+  group_by(habitat_type) %>%
+  summarize(OrderRichness = n_distinct(order))  # Count unique orders
+
+light_richness <- light %>%
+  group_by(location) %>%
+  summarize(OrderRichness = n_distinct(order))
+
+
+## Summarize by family and habitat type ##
+
 
 
 
 ############### Code Pieces Repository/Workshop ######################
-
-
-##### Separating columns by taxonomic group #####
-#taxonomic_columns <- list(
- # Order = c("coleoptera", "araneae", "orthoptera", "diptera", "hymenoptera", "lepidoptera", "opiliones", "lithobiomorpha", "stylommatophora", "neuroptera", "hemiptera", "amphipoda")
 
 
 ##### Transform Pitfall and Pan to Long Format ##### Not ready for this as sheets are still mixed taxonomic group
