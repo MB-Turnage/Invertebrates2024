@@ -435,6 +435,7 @@ light_richness <- light %>%
   summarize(OrderRichness = n_distinct(order))
 
 
+
 ###### Pitfall Trap Cleaning ######
 
 
@@ -831,6 +832,7 @@ my_list <- list(
 write_xlsx(my_list, "C:\\UCNZ\\R\\Invertebrates_2024\\Invertebrates_2024_Data\\Invert_Data_R_Version.xlsx")
 
 ### START TOMORROW BY TRYING FAMILY DIVERSITY - Make new branch ###
+
 
 ############### Code Pieces Repository/Workshop ######################
 
