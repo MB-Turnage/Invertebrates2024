@@ -433,6 +433,7 @@ light_richness <- light %>%
   summarize(OrderRichness = n_distinct(order))
 
 
+
 ###### Pitfall Trap Cleaning ######
 
 
@@ -813,6 +814,7 @@ long_pitfall <- long_pitfall %>%
       TRUE ~ phylum
     )
   )
+
 
 
 
