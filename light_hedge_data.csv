@@ -1,0 +1,211 @@
+"","site_number","farm","habitat_type","method","date","phylum","class","superorder","order","family","subfamily","tribe","genus","species","abundance","confirmed","LTU","LTU_rank","mean_height","mean_canopy_layers"
+"1",1,"LI1","Fence","LT","24/12/2024","arthropoda","insecta",NA,"trichoptera","tortricidae",NA,NA,"capua",NA,1,"YES","capua","genus",1,0.5
+"2",1,"LI1","Fence","LT","24/12/2024","arthropoda","insecta",NA,"trichoptera","tortricidae",NA,NA,"capua",NA,1,"YES","capua","genus",1,0.5
+"3",1,"LI1","Fence","LT","24/12/2024","arthropoda","insecta",NA,"lepidoptera","geometridae","larentiinae","xanthorhoini","epyaxa","epyaxa rosearia",1,"YES","epyaxa rosearia","species",1,0.5
+"4",1,"LI1","Fence","LT","24/12/2024","arthropoda","insecta",NA,"lepidoptera","noctuidae",NA,NA,"ichneutica","ichneutica mutans",1,"YES","ichneutica mutans","species",1,0.5
+"5",1,"LI1","Fence","LT","24/12/2024","arthropoda","insecta",NA,"diptera","muscidae",NA,NA,NA,NA,1,"YES","muscidae","family",1,0.5
+"6",1,"LI1","Fence","LT","24/12/2024","arthropoda","insecta",NA,"diptera",NA,NA,NA,NA,NA,1,"YES","diptera","order",1,0.5
+"7",1,"LI1","Fence","LT","24/12/2024","arthropoda","insecta",NA,"lepidoptera","tortricidae",NA,NA,NA,NA,1,"YES","tortricidae","family",1,0.5
+"8",1,"LI1","Field","LT","24/12/2024","arthropoda","insecta",NA,"lepidoptera","noctuidae",NA,NA,"ichneutica","ichneutica mutans",4,"YES","ichneutica mutans","species",0.72,0.1
+"9",1,"LI1","Field","LT","24/12/2024","arthropoda","insecta",NA,"diptera",NA,NA,NA,NA,NA,2,"YES","diptera","order",0.72,0.1
+"10",8,"MT8","Fence","LT","24/12/2024","arthropoda","insecta",NA,"lepidoptera","crambidae",NA,NA,"hygraula","hygraula nitens",3,"YES","hygraula nitens","species",1,0.5
+"11",8,"MT8","Fence","LT","24/12/2024","arthropoda","insecta",NA,"trichoptera",NA,NA,NA,NA,NA,1,"YES","trichoptera","order",1,0.5
+"12",8,"MT8","Fence","LT","24/12/2024","arthropoda","insecta",NA,"diptera",NA,NA,NA,NA,NA,5,"YES","diptera","order",1,0.5
+"13",8,"MT8","Field","LT","24/12/2024","arthropoda","insecta",NA,"lepidoptera","geometridae",NA,NA,"helastia","helastia corcularia",1,"YES","helastia corcularia","species",0.72,0.1
+"14",8,"MT8","Field","LT","24/12/2024","arthropoda","insecta",NA,"coleoptera","cerambycidae","prioninae","rhipidocerini","prionoplus","prionoplus reticularis",1,"YES","prionoplus reticularis","species",0.72,0.1
+"15",8,"MT8","Field","LT","24/12/2024","arthropoda","insecta",NA,"lepidoptera","crambidae",NA,NA,"hygraula","hygraula nitens",3,"YES","hygraula nitens","species",0.72,0.1
+"16",8,"MT8","Field","LT","24/12/2024","arthropoda","insecta",NA,"lepidoptera",NA,NA,NA,NA,NA,12,"YES","lepidoptera","order",0.72,0.1
+"17",8,"MT8","Field","LT","24/12/2024","arthropoda","insecta",NA,"diptera",NA,NA,NA,NA,NA,5,"YES","diptera","order",0.72,0.1
+"18",8,"MT8","Field","LT","24/12/2024","arthropoda","insecta",NA,"trichoptera",NA,NA,NA,NA,NA,14,"YES","trichoptera","order",0.72,0.1
+"19",8,"MT8","Field","LT","24/12/2024","arthropoda","insecta",NA,"lepidoptera",NA,NA,NA,"wisiena",NA,2,"YES","wisiena","genus",0.72,0.1
+"20",8,"MT8","Native","LT","24/12/2024","arthropoda","insecta",NA,"lepidoptera","crambidae",NA,NA,NA,NA,1,"YES","crambidae","family",6.33666666666667,2
+"21",8,"MT8","Native","LT","24/12/2024","arthropoda","insecta",NA,"lepidoptera","crambidae",NA,NA,"eudonia",NA,1,"YES","eudonia","genus",6.33666666666667,2
+"22",8,"MT8","Native","LT","24/12/2024","arthropoda","insecta",NA,"diptera","sarcophagidae",NA,NA,NA,NA,2,"YES","sarcophagidae","family",6.33666666666667,2
+"23",8,"MT8","Native","LT","24/12/2024","arthropoda","insecta",NA,"lepidoptera","geometridae",NA,NA,"helastia","helastia corcularia",1,"YES","helastia corcularia","species",6.33666666666667,2
+"24",8,"MT8","Native","LT","24/12/2024","arthropoda","insecta",NA,"lepidoptera",NA,NA,NA,NA,NA,1,"YES","lepidoptera","order",6.33666666666667,2
+"25",8,"MT8","Native","LT","24/12/2024","arthropoda","insecta",NA,"diptera",NA,NA,NA,NA,NA,3,"YES","diptera","order",6.33666666666667,2
+"26",8,"MT8","Native","LT","24/12/2024","arthropoda","insecta",NA,"trichoptera",NA,NA,NA,NA,NA,3,"YES","trichoptera","order",6.33666666666667,2
+"27",8,"MT8","Native","LT","24/12/2024","arthropoda","insecta",NA,"lepidoptera","crambidae","crambinae","crambini","orocrambus","orocrambus ramosellus",1,"YES","orocrambus ramosellus","species",6.33666666666667,2
+"28",8,"MT8","NonNative","LT","20/12/2024","arthropoda","insecta",NA,"diptera",NA,NA,NA,NA,NA,1,"YES","diptera","order",11.5466666666667,2
+"29",8,"MT8","NonNative","LT","20/12/2024","arthropoda","insecta",NA,"coleoptera",NA,NA,NA,"staphylinidae",NA,2,"YES","staphylinidae","genus",11.5466666666667,2
+"30",4,"TE4","Fence","LT","24/12/2024","arthropoda","insecta",NA,"diptera","syrphidae",NA,NA,NA,NA,1,"YES","syrphidae","family",1,0.5
+"31",4,"TE4","Native","LT","24/12/2024","arthropoda","insecta",NA,"coleoptera","scirtidae",NA,NA,NA,NA,1,"YES","scirtidae","family",2.34666666666667,2
+"32",4,"TE4","NonNative","LT","24/12/2024","arthropoda","insecta",NA,"diptera",NA,NA,NA,NA,NA,2,"YES","diptera","order",11.8533333333333,1
+"33",4,"TE4","NonNative","LT","24/12/2024","arthropoda","insecta",NA,"trichoptera",NA,NA,NA,NA,NA,10,"YES","trichoptera","order",11.8533333333333,1
+"34",4,"TE4","NonNative","LT","24/12/2024","arthropoda","insecta",NA,"lepidoptera",NA,NA,NA,"wisiena",NA,1,"YES","wisiena","genus",11.8533333333333,1
+"35",6,"BA6","NonNative","LT","20/12/2024","arthropoda","insecta",NA,"diptera",NA,NA,NA,NA,NA,2,"YES","diptera","order",8.04666666666667,1
+"36",6,"BA6","NonNative","LT","20/12/2024","arthropoda","insecta",NA,"lepidoptera",NA,NA,NA,"pseudocoremia",NA,1,"YES","pseudocoremia","genus",8.04666666666667,1
+"37",3,"TA3","Fence","LT","20/12/2024","arthropoda","insecta",NA,"coleoptera","hydrophilidae",NA,NA,NA,NA,5,"YES","hydrophilidae","family",1,0.5
+"38",3,"TA3","Fence","LT","20/12/2024","arthropoda","insecta",NA,"lepidoptera","geometridae","larentiinae","xanthorhoini","epyaxa","epyaxa rosearia",1,"YES","epyaxa rosearia","species",1,0.5
+"39",3,"TA3","Fence","LT","20/12/2024","arthropoda","insecta",NA,"lepidoptera","crambidae",NA,NA,"eudonia","eudonia submarginalis",1,"YES","eudonia submarginalis","species",1,0.5
+"40",3,"TA3","Fence","LT","20/12/2024","arthropoda","insecta",NA,"lepidoptera","crambidae",NA,NA,"hygraula","hygraula nitens",2,"YES","hygraula nitens","species",1,0.5
+"41",3,"TA3","Fence","LT","20/12/2024","arthropoda","insecta",NA,"lepidoptera",NA,NA,NA,NA,NA,4,"YES","lepidoptera","order",1,0.5
+"42",3,"TA3","Fence","LT","20/12/2024","arthropoda","insecta",NA,"coleoptera","carabidae",NA,"lebiini",NA,NA,1,"YES","lebiini","tribe",1,0.5
+"43",3,"TA3","Fence","LT","20/12/2024","arthropoda","insecta",NA,"trichoptera",NA,NA,NA,NA,NA,17,"YES","trichoptera","order",1,0.5
+"44",3,"TA3","Fence","LT","20/12/2024","arthropoda","insecta",NA,"coleoptera",NA,NA,NA,"odontria",NA,1,"YES","odontria","genus",1,0.5
+"45",3,"TA3","Fence","LT","20/12/2024","arthropoda","insecta",NA,"lepidoptera","crambidae","crambinae","crambini","orocrambus","orocrambus flexuosellus",1,"YES","orocrambus flexuosellus","species",1,0.5
+"46",3,"TA3","Fence","LT","20/12/2024","arthropoda","insecta",NA,"coleoptera",NA,NA,NA,"staphylinidae",NA,1,"YES","staphylinidae","genus",1,0.5
+"47",3,"TA3","Fence","LT","20/12/2024","arthropoda","insecta",NA,"lepidoptera",NA,NA,NA,"wisiena",NA,4,"YES","wisiena","genus",1,0.5
+"48",3,"TA3","Field","LT","22/12/2024","arthropoda","insecta",NA,"coleoptera","latridiidae",NA,NA,"cartodere","cartodere bifasciata",1,"YES","cartodere bifasciata","species",0.72,0.1
+"49",3,"TA3","Native","LT","22/12/2042","arthropoda","insecta",NA,"coleoptera","scarabaeidae","aphodiinae","aphodiini","acrossidius","acrossidius tasmaniae",1,"YES","acrossidius tasmaniae","species",3.41333333333333,3
+"50",3,"TA3","NonNative","LT","22/12/2038","arthropoda","insecta",NA,"coleoptera","carabidae",NA,NA,"agonochelia","agonochelia antipodium",1,"YES","agonochelia antipodium","species",2.81,1
+"51",3,"TA3","NonNative","LT","22/12/2042","arthropoda","insecta",NA,"lepidoptera","oecophoridae",NA,NA,"barea","barea exarcha",1,"YES","barea exarcha","species",2.81,1
+"52",3,"TA3","NonNative","LT","22/12/2040","arthropoda","insecta",NA,"trichoptera","tortricidae",NA,NA,"capua",NA,5,"YES","capua","genus",2.81,1
+"53",3,"TA3","NonNative","LT","22/12/2041","arthropoda","insecta",NA,"lepidoptera","crambidae",NA,NA,NA,NA,4,"YES","crambidae","family",2.81,1
+"54",3,"TA3","NonNative","LT","22/12/2036","arthropoda","insecta",NA,"coleoptera","hydrophilidae",NA,NA,NA,NA,2,"YES","hydrophilidae","family",2.81,1
+"55",3,"TA3","NonNative","LT","22/12/2034","arthropoda","insecta",NA,"lepidoptera","tortricidae",NA,NA,"epiphyas","epiphyas postivittana",8,"YES","epiphyas postivittana","species",2.81,1
+"56",3,"TA3","NonNative","LT","22/12/2029","arthropoda","insecta",NA,"lepidoptera","geometridae","larentiinae","xanthorhoini","epyaxa","epyaxa rosearia",1,"YES","epyaxa rosearia","species",2.81,1
+"57",3,"TA3","NonNative","LT","22/12/2026","arthropoda","insecta",NA,"lepidoptera","geometridae","larentiinae","xanthorhoini","epyaxa","epyaxa rosearia",4,"YES","epyaxa rosearia","species",2.81,1
+"58",7,"MT7","Native","LT","20/12/2042","arthropoda","insecta",NA,"lepidoptera",NA,NA,NA,NA,NA,5,"YES","lepidoptera","order",5.46,3
+"59",7,"MT7","Native","LT","20/12/2042","arthropoda","insecta",NA,"coleoptera",NA,NA,NA,"odontria",NA,1,"YES","odontria","genus",5.46,3
+"60",7,"MT7","Fence","LT","22/12/2024","arthropoda","insecta",NA,"lepidoptera","geometridae",NA,NA,"chloroclystis","chloroclystis inductata",1,"YES","chloroclystis inductata","species",1,0.5
+"61",7,"MT7","Fence","LT","22/12/2024","arthropoda","insecta",NA,"lepidoptera","crambidae",NA,NA,NA,NA,4,"YES","crambidae","family",1,0.5
+"62",7,"MT7","Fence","LT","22/12/2024","arthropoda","insecta",NA,"lepidoptera","geometridae","larentiinae","xanthorhoini","epyaxa","epyaxa rosearia",1,"YES","epyaxa rosearia","species",1,0.5
+"63",7,"MT7","Fence","LT","22/12/2024","arthropoda","insecta",NA,"diptera","sarcophagidae",NA,NA,NA,NA,1,"YES","sarcophagidae","family",1,0.5
+"64",7,"MT7","Fence","LT","22/12/2024","arthropoda","insecta",NA,"lepidoptera","crambidae",NA,NA,"hygraula","hygraula nitens",20,"YES","hygraula nitens","species",1,0.5
+"65",7,"MT7","Fence","LT","22/12/2024","arthropoda","insecta",NA,"diptera",NA,NA,NA,NA,NA,28,"YES","diptera","order",1,0.5
+"66",7,"MT7","Fence","LT","22/12/2024","arthropoda","insecta",NA,"trichoptera",NA,NA,NA,NA,NA,32,"YES","trichoptera","order",1,0.5
+"67",7,"MT7","Fence","LT","22/12/2024","arthropoda","insecta",NA,"lepidoptera","crambidae","crambinae","crambini","orocrambus","orocrambus flexuosellus",2,"YES","orocrambus flexuosellus","species",1,0.5
+"68",7,"MT7","Fence","LT","22/12/2024","arthropoda","insecta",NA,"lepidoptera",NA,NA,NA,"wisiena",NA,1,"YES","wisiena","genus",1,0.5
+"69",7,"MT7","Field","LT","22/12/2024","arthropoda","insecta",NA,"lepidoptera","crambidae",NA,NA,NA,NA,1,"YES","crambidae","family",0.72,0.1
+"70",7,"MT7","Field","LT","22/12/2024","arthropoda","insecta",NA,"lepidoptera","crambidae",NA,NA,NA,NA,2,"YES","crambidae","family",0.72,0.1
+"71",7,"MT7","Native","LT","22/12/2024","arthropoda","insecta",NA,"trichoptera","tortricidae",NA,NA,"capua",NA,1,"YES","capua","genus",5.46,3
+"72",7,"MT7","Native","LT","22/12/2024","arthropoda","insecta",NA,"lepidoptera","crambidae",NA,NA,NA,NA,1,"YES","crambidae","family",5.46,3
+"73",7,"MT7","Native","LT","22/12/2024","arthropoda","insecta",NA,"lepidoptera","crambidae",NA,NA,NA,NA,3,"YES","crambidae","family",5.46,3
+"74",7,"MT7","Native","LT","22/12/2024","arthropoda","insecta",NA,"lepidoptera","geometridae",NA,NA,NA,NA,3,"YES","geometridae","family",5.46,3
+"75",7,"MT7","Native","LT","22/12/2024","arthropoda","insecta",NA,"lepidoptera","crambidae",NA,NA,"hygraula","hygraula nitens",1,"YES","hygraula nitens","species",5.46,3
+"76",7,"MT7","Native","LT","22/12/2024","arthropoda","insecta",NA,"lepidoptera","crambidae",NA,NA,"hygraula","hygraula nitens",9,"YES","hygraula nitens","species",5.46,3
+"77",7,"MT7","Native","LT","22/12/2024","arthropoda","insecta",NA,"lepidoptera","noctuidae",NA,NA,"ichneutica","ichneutica mutans",3,"YES","ichneutica mutans","species",5.46,3
+"78",7,"MT7","Native","LT","22/12/2024","arthropoda","insecta",NA,"trichoptera",NA,NA,NA,NA,NA,1,"YES","trichoptera","order",5.46,3
+"79",7,"MT7","Native","LT","22/12/2024","arthropoda","insecta",NA,"lepidoptera",NA,NA,NA,NA,NA,1,"No","lepidoptera","order",5.46,3
+"80",7,"MT7","Native","LT","22/12/2024","arthropoda","insecta",NA,"diptera",NA,NA,NA,NA,NA,2,"YES","diptera","order",5.46,3
+"81",7,"MT7","Native","LT","22/12/2024","arthropoda","insecta",NA,"trichoptera",NA,NA,NA,NA,NA,2,"NO","trichoptera","order",5.46,3
+"82",7,"MT7","Native","LT","22/12/2024","arthropoda","insecta",NA,"lepidoptera",NA,NA,NA,NA,NA,2,"NO","lepidoptera","order",5.46,3
+"83",7,"MT7","Native","LT","22/12/2024","arthropoda","insecta",NA,"diptera",NA,NA,NA,NA,NA,20,"YES","diptera","order",5.46,3
+"84",7,"MT7","Native","LT","22/12/2024","arthropoda","insecta",NA,"trichoptera",NA,NA,NA,NA,NA,59,"YES","trichoptera","order",5.46,3
+"85",7,"MT7","Native","LT","22/12/2024","arthropoda","insecta",NA,"coleoptera",NA,NA,NA,"odontria",NA,1,"YES","odontria","genus",5.46,3
+"86",7,"MT7","Native","LT","22/12/2024","arthropoda","insecta",NA,"lepidoptera","crambidae","crambinae","crambini","orocrambus","orocrambus flexuosellus",1,"YES","orocrambus flexuosellus","species",5.46,3
+"87",7,"MT7","Native","LT","22/12/2024","arthropoda","insecta",NA,"lepidoptera","crambidae","crambinae","crambini","orocrambus",NA,1,"NO","orocrambus","genus",5.46,3
+"88",7,"MT7","Native","LT","22/12/2024","arthropoda","insecta",NA,"lepidoptera","geometridae",NA,NA,NA,NA,1,"YES","geometridae","family",5.46,3
+"89",7,"MT7","Native","LT","22/12/2024","arthropoda","insecta",NA,"lepidoptera",NA,NA,NA,"wisiena",NA,4,"YES","wisiena","genus",5.46,3
+"90",2,"EL2","Fence","LT","24/12/2024","arthropoda","insecta",NA,"coleoptera","scarabaeidae","aphodiinae","aphodiini","acrossidius","acrossidius tasmaniae",1,"YES","acrossidius tasmaniae","species",1,0.5
+"91",2,"EL2","Fence","LT","24/12/2024","arthropoda","insecta",NA,"lepidoptera","pterophoridae",NA,NA,"amblyptilia",NA,1,"YES","amblyptilia","genus",1,0.5
+"92",2,"EL2","Fence","LT","24/12/2024","arthropoda","insecta",NA,"trichoptera","tortricidae",NA,NA,"capua",NA,4,"YES","capua","genus",1,0.5
+"93",2,"EL2","Fence","LT","24/12/2024","arthropoda","insecta",NA,"coleoptera","carabidae",NA,NA,NA,NA,100,"YES","carabidae","family",1,0.5
+"94",2,"EL2","Fence","LT","24/12/2024","arthropoda","insecta",NA,"lepidoptera","crambidae",NA,NA,NA,NA,1,"YES","crambidae","family",1,0.5
+"95",2,"EL2","Fence","LT","24/12/2024","arthropoda","insecta",NA,"coleoptera","hydrophilidae",NA,NA,NA,NA,16,"YES","hydrophilidae","family",1,0.5
+"96",2,"EL2","Fence","LT","24/12/2024","arthropoda","insecta",NA,"lepidoptera","geometridae","larentiinae","xanthorhoini","epyaxa","epyaxa rosearia",4,"YES","epyaxa rosearia","species",1,0.5
+"97",2,"EL2","Fence","LT","24/12/2024","arthropoda","insecta",NA,"lepidoptera","crambidae",NA,NA,"eudonia","eudonia submarginalis",2,"YES","eudonia submarginalis","species",1,0.5
+"98",2,"EL2","Fence","LT","24/12/2024","arthropoda","insecta",NA,"lepidoptera","crambidae",NA,NA,"hygraula","hygraula nitens",3,"YES","hygraula nitens","species",1,0.5
+"99",2,"EL2","Fence","LT","24/12/2024","arthropoda","insecta",NA,"coleoptera","scirtidae",NA,NA,NA,NA,3,"YES","scirtidae","family",1,0.5
+"100",2,"EL2","Fence","LT","24/12/2024","arthropoda","insecta",NA,"coleoptera","carabidae","platyninae","platynini","notagonum","notagonum submetallicum",1,"NO","notagonum submetallicum","species",1,0.5
+"101",2,"EL2","Fence","LT","24/12/2024","arthropoda","insecta",NA,"lepidoptera",NA,NA,NA,NA,NA,8,"YES","lepidoptera","order",1,0.5
+"102",2,"EL2","Fence","LT","24/12/2024","arthropoda","insecta",NA,"lepidoptera","crambidae",NA,NA,"eudonia","eudonia leptalaea",1,"NO","eudonia leptalaea","species",1,0.5
+"103",2,"EL2","Fence","LT","24/12/2024","arthropoda","insecta",NA,"lepidoptera",NA,NA,NA,"coleophora",NA,1,"NO","coleophora","genus",1,0.5
+"104",2,"EL2","Fence","LT","24/12/2024","arthropoda","insecta",NA,"diptera",NA,NA,NA,NA,NA,5,"YES","diptera","order",1,0.5
+"105",2,"EL2","Fence","LT","24/12/2024","arthropoda","insecta",NA,"trichoptera",NA,NA,NA,NA,NA,22,"YES","trichoptera","order",1,0.5
+"106",2,"EL2","Fence","LT","24/12/2024","arthropoda","insecta",NA,"coleoptera","carabidae","platyninae","platynini","notagonum","notagonum submetallicum",6,"YES","notagonum submetallicum","species",1,0.5
+"107",2,"EL2","Fence","LT","24/12/2024","arthropoda","insecta",NA,"lepidoptera","crambidae","crambinae","crambini","orocrambus","orocrambus flexuosellus",1,"YES","orocrambus flexuosellus","species",1,0.5
+"108",2,"EL2","Fence","LT","24/12/2024","arthropoda","insecta",NA,"coleoptera",NA,"licininae",NA,NA,NA,2,"NO","licininae","subfamily",1,0.5
+"109",2,"EL2","Fence","LT","24/12/2024","arthropoda","insecta",NA,"coleoptera",NA,NA,NA,"staphylinidae",NA,14,"YES","staphylinidae","genus",1,0.5
+"110",2,"EL2","Fence","LT","24/12/2024","arthropoda","insecta",NA,"Hemiptera","lygaeidae",NA,NA,NA,NA,1,"YES","lygaeidae","family",1,0.5
+"111",2,"EL2","Fence","LT","24/12/2024","arthropoda","insecta",NA,"coleoptera",NA,"pselaphinae",NA,NA,NA,4,"YES","pselaphinae","subfamily",1,0.5
+"112",2,"EL2","Field","LT","22/12/2025","arthropoda","insecta",NA,"coleoptera","scarabaeidae","aphodiinae","aphodiini","acrossidius","acrossidius tasmaniae",1,"YES","acrossidius tasmaniae","species",0.72,0.1
+"113",2,"EL2","Field","LT","22/12/2035","arthropoda","insecta",NA,"lepidoptera","pterophoridae",NA,NA,"amblyptilia",NA,1,"YES","amblyptilia","genus",0.72,0.1
+"114",2,"EL2","Field","LT","22/12/2042","arthropoda","insecta",NA,"coleoptera","carabidae",NA,NA,NA,NA,1,"NO","carabidae","family",0.72,0.1
+"115",2,"EL2","Field","LT","22/12/2024","arthropoda","insecta",NA,"coleoptera","carabidae",NA,NA,NA,NA,0,"YES","carabidae","family",0.72,0.1
+"116",2,"EL2","Field","LT","22/12/2041","arthropoda","insecta",NA,"coleoptera","carabidae",NA,NA,NA,NA,3,"NO","carabidae","family",0.72,0.1
+"117",2,"EL2","Field","LT","22/12/2038","arthropoda","insecta",NA,"lepidoptera","crambidae",NA,NA,NA,NA,5,"NO","crambidae","family",0.72,0.1
+"118",2,"EL2","Field","LT","22/12/2040","arthropoda","insecta",NA,"lepidoptera","tortricidae",NA,NA,"cydia","cydia succedana",2,"YES","cydia succedana","species",0.72,0.1
+"119",2,"EL2","Field","LT","22/12/2037","arthropoda","insecta",NA,"lepidoptera","geometridae","larentiinae","xanthorhoini","epyaxa","epyaxa rosearia",2,"YES","epyaxa rosearia","species",0.72,0.1
+"120",2,"EL2","Field","LT","22/12/2024","arthropoda","insecta",NA,"lepidoptera","crambidae",NA,NA,"eudonia","eudonia submarginalis",1,"YES","eudonia submarginalis","species",0.72,0.1
+"121",2,"EL2","Field","LT","22/12/2030","arthropoda","insecta",NA,"coleoptera","hydrophilidae",NA,NA,NA,NA,8,"YES","hydrophilidae","family",0.72,0.1
+"122",2,"EL2","Field","LT","22/12/2028","arthropoda","insecta",NA,"lepidoptera","crambidae",NA,NA,"hygraula","hygraula nitens",5,"YES","hygraula nitens","species",0.72,0.1
+"123",2,"EL2","Field","LT","22/12/2034","arthropoda","insecta",NA,"lepidoptera","noctuidae",NA,NA,"ichneutica","ichneutica plena",1,"YES","ichneutica plena","species",0.72,0.1
+"124",2,"EL2","Field","LT","22/12/2032","arthropoda","insecta",NA,"lepidoptera",NA,NA,NA,NA,NA,2,"YES","lepidoptera","order",0.72,0.1
+"125",2,"EL2","Field","LT","22/12/2031","arthropoda","insecta",NA,"diptera",NA,NA,NA,NA,NA,14,"YES","diptera","order",0.72,0.1
+"126",2,"EL2","Field","LT","22/12/2029","arthropoda","insecta",NA,"trichoptera",NA,NA,NA,NA,NA,35,"YES","trichoptera","order",0.72,0.1
+"127",2,"EL2","Field","LT","22/12/2026","arthropoda","insecta",NA,"coleoptera","carabidae","platyninae","platynini","notagonum","notagonum submetallicum",65,"YES","notagonum submetallicum","species",0.72,0.1
+"128",2,"EL2","Field","LT","22/12/2039","arthropoda","insecta",NA,"lepidoptera","crambidae","crambinae","crambini","orocrambus",NA,1,"YES","orocrambus","genus",0.72,0.1
+"129",2,"EL2","Field","LT","22/12/2027","arthropoda","insecta",NA,"lepidoptera","crambidae","crambinae","crambini","orocrambus","orocrambus flexuosellus",1,"YES","orocrambus flexuosellus","species",0.72,0.1
+"130",2,"EL2","Field","LT","22/12/2033","arthropoda","insecta",NA,"lepidoptera",NA,NA,NA,"wisiena",NA,1,"NO","wisiena","genus",0.72,0.1
+"131",2,"EL2","Field","LT","22/12/2036","arthropoda","insecta",NA,"lepidoptera","geometridae",NA,NA,"xanthorhoe","xanthorhoe semifissata",1,"YES","xanthorhoe semifissata","species",0.72,0.1
+"132",2,"EL2","Native","LT","22/12/2028","arthropoda","insecta",NA,"coleoptera","carabidae",NA,NA,NA,NA,16,"YES","carabidae","family",4.62,5
+"133",2,"EL2","Native","LT","22/12/2036","arthropoda","insecta",NA,"coleoptera","hydrophilidae",NA,NA,NA,NA,4,"YES","hydrophilidae","family",4.62,5
+"134",2,"EL2","Native","LT","22/12/2024","arthropoda","insecta",NA,"lepidoptera","tortricidae",NA,NA,"epiphyas","epiphyas postivittana",3,"YES","epiphyas postivittana","species",4.62,5
+"135",2,"EL2","Native","LT","22/12/2035","arthropoda","insecta",NA,"lepidoptera","geometridae","larentiinae","xanthorhoini","epyaxa","epyaxa rosearia",1,"YES","epyaxa rosearia","species",4.62,5
+"136",2,"EL2","Native","LT","22/12/2033","arthropoda","insecta",NA,"lepidoptera","crambidae",NA,NA,"eudonia","eudonia leptalaea",1,"YES","eudonia leptalaea","species",4.62,5
+"137",2,"EL2","Native","LT","22/12/2029","arthropoda","insecta",NA,"dermaptera","forficulidae","forficulinae","forficulini","forficula","forficula auricularia",1,"YES","forficula auricularia","species",4.62,5
+"138",2,"EL2","Native","LT","20/12/2042","arthropoda","insecta",NA,"lepidoptera","geometridae",NA,NA,NA,NA,1,"YES","geometridae","family",4.62,5
+"139",2,"EL2","Native","LT","22/12/2026","arthropoda","insecta",NA,"lepidoptera","crambidae",NA,NA,"hygraula","hygraula nitens",1,"YES","hygraula nitens","species",4.62,5
+"140",2,"EL2","Native","LT","22/12/2025","arthropoda","insecta",NA,"coleoptera","elateridae",NA,NA,"monocrepidius","monocrepidius exsul",6,"YES","monocrepidius exsul","species",4.62,5
+"141",2,"EL2","Native","LT","22/12/2024","arthropoda","insecta",NA,"diptera",NA,NA,NA,NA,NA,30,"YES","diptera","order",4.62,5
+"142",2,"EL2","Native","LT","22/12/2037","arthropoda","insecta",NA,"trichoptera",NA,NA,NA,NA,NA,33,"YES","trichoptera","order",4.62,5
+"143",2,"EL2","Native","LT","22/12/2027","arthropoda","insecta",NA,"coleoptera","carabidae","platyninae","platynini","notagonum","notagonum submetallicum",1,"YES","notagonum submetallicum","species",4.62,5
+"144",2,"EL2","Native","LT","22/12/2030","arthropoda","insecta",NA,"lepidoptera","crambidae","crambinae","crambini","orocrambus","orocrambus flexuosellus",1,"YES","orocrambus flexuosellus","species",4.62,5
+"145",2,"EL2","Native","LT","22/12/2031","arthropoda","insecta",NA,"lepidoptera","crambidae","crambinae","crambini","orocrambus","orocrambus ramosellus",1,"YES","orocrambus ramosellus","species",4.62,5
+"146",2,"EL2","Native","LT","22/12/2034","arthropoda","insecta",NA,"lepidoptera","choreutidae",NA,NA,"tebenna","tebenna micalis",2,"YES","tebenna micalis","species",4.62,5
+"147",2,"EL2","Native","LT","22/12/2032","arthropoda","insecta",NA,"lepidoptera","crambidae",NA,NA,"uresiphita","uresiphita maorialis",1,"YES","uresiphita maorialis","species",4.62,5
+"148",2,"EL2","NonNative","LT","20/12/2042","arthropoda","insecta",NA,"coleoptera","scarabaeidae","aphodiinae","aphodiini","acrossidius","acrossidius tasmaniae",1,"YES","acrossidius tasmaniae","species",6.88,1.33333333333333
+"149",2,"EL2","NonNative","LT","20/12/2033","arthropoda","insecta",NA,"lepidoptera","pterophoridae",NA,NA,"amblyptilia",NA,1,"YES","amblyptilia","genus",6.88,1.33333333333333
+"150",2,"EL2","NonNative","LT","20/12/2037","arthropoda","insecta",NA,"trichoptera","tortricidae",NA,NA,"capua",NA,2,"YES","capua","genus",6.88,1.33333333333333
+"151",2,"EL2","NonNative","LT","20/12/2041","arthropoda","insecta",NA,"coleoptera","carabidae",NA,NA,NA,NA,9,"YES","carabidae","family",6.88,1.33333333333333
+"152",2,"EL2","NonNative","LT","20/12/2036","arthropoda","insecta",NA,"lepidoptera","crambidae",NA,NA,NA,NA,1,"YES","crambidae","family",6.88,1.33333333333333
+"153",2,"EL2","NonNative","LT","20/12/2031","arthropoda","insecta",NA,"coleoptera","hydrophilidae",NA,NA,NA,NA,1,"YES","hydrophilidae","family",6.88,1.33333333333333
+"154",2,"EL2","NonNative","LT","20/12/2038","arthropoda","insecta",NA,"lepidoptera",NA,NA,NA,NA,NA,1,"YES","lepidoptera","order",6.88,1.33333333333333
+"155",2,"EL2","NonNative","LT","20/12/2034","arthropoda","insecta",NA,"dermaptera","forficulidae","forficulinae","forficulini","forficula","forficula auricularia",1,"YES","forficula auricularia","species",6.88,1.33333333333333
+"156",2,"EL2","NonNative","LT","20/12/2035","arthropoda","insecta",NA,"lepidoptera","geometridae",NA,NA,NA,NA,2,"YES","geometridae","family",6.88,1.33333333333333
+"157",2,"EL2","NonNative","LT","20/12/2027","arthropoda","insecta",NA,"lepidoptera","crambidae",NA,NA,"hygraula","hygraula nitens",6,"YES","hygraula nitens","species",6.88,1.33333333333333
+"158",2,"EL2","NonNative","LT","20/12/2024","arthropoda","insecta",NA,"lepidoptera",NA,NA,NA,NA,NA,3,"YES","lepidoptera","order",6.88,1.33333333333333
+"159",2,"EL2","NonNative","LT","20/12/2025","arthropoda","insecta",NA,"coleoptera","elateridae",NA,NA,"monocrepidius","monocrepidius exsul",2,"YES","monocrepidius exsul","species",6.88,1.33333333333333
+"160",2,"EL2","NonNative","LT","20/12/2030","arthropoda","insecta",NA,"hymenoptera",NA,NA,NA,NA,NA,1,"YES","hymenoptera","order",6.88,1.33333333333333
+"161",2,"EL2","NonNative","LT","20/12/2029","arthropoda","insecta",NA,"diptera",NA,NA,NA,NA,NA,8,"YES","diptera","order",6.88,1.33333333333333
+"162",2,"EL2","NonNative","LT","20/12/2032","arthropoda","insecta",NA,"trichoptera",NA,NA,NA,NA,NA,54,"YES","trichoptera","order",6.88,1.33333333333333
+"163",2,"EL2","NonNative","LT","20/12/2040","arthropoda","insecta",NA,"coleoptera","carabidae","platyninae","platynini","notagonum","notagonum submetallicum",4,"YES","notagonum submetallicum","species",6.88,1.33333333333333
+"164",2,"EL2","NonNative","LT","20/12/2028","arthropoda","insecta",NA,"lepidoptera","crambidae","crambinae","crambini","orocrambus","orocrambus flexuosellus",1,"YES","orocrambus flexuosellus","species",6.88,1.33333333333333
+"165",2,"EL2","NonNative","LT","20/12/2039","arthropoda","insecta",NA,"lepidoptera",NA,NA,NA,NA,NA,1,"YES","lepidoptera","order",6.88,1.33333333333333
+"166",2,"EL2","NonNative","LT","20/12/2026","arthropoda","insecta",NA,"lepidoptera",NA,NA,NA,"wisiena",NA,5,"YES","wisiena","genus",6.88,1.33333333333333
+"167",5,"BA5","Fence","LT","20/12/2024","arthropoda","insecta",NA,NA,NA,NA,NA,NA,NA,0,NA,"insecta","class",1,0.5
+"168",5,"BA5","Native","LT","22/12/2024","arthropoda","insecta",NA,"trichoptera","tortricidae",NA,NA,"capua",NA,1,"YES","capua","genus",3.46333333333333,2.66666666666667
+"169",1,"LI1","Native","LT","22/12/2024","arthropoda","insecta",NA,"lepidoptera","geometridae",NA,NA,"helastia","helastia corcularia",1,"YES","helastia corcularia","species",4.26,2
+"170",1,"LI1","Native","LT","22/12/2024","arthropoda","insecta",NA,"diptera",NA,NA,NA,NA,NA,4,"YES","diptera","order",4.26,2
+"171",4,"TE4","Field","LT","22/12/2024","arthropoda","insecta",NA,"diptera",NA,NA,NA,NA,NA,1,"YES","diptera","order",0.72,0.1
+"172",4,"TE4","Field","LT","22/12/2024","arthropoda","insecta",NA,"trichoptera",NA,NA,NA,NA,NA,3,"YES","trichoptera","order",0.72,0.1
+"173",3,"TA3","NonNative","LT","22/12/2031","arthropoda","insecta",NA,"lepidoptera","geometridae",NA,NA,"homodotis","homodotis megapilata",1,"YES","homodotis megapilata","species",2.81,1
+"174",3,"TA3","NonNative","LT","22/12/2028","arthropoda","insecta",NA,"lepidoptera","geometridae",NA,NA,"hydriomena","hydriomena deltoidata",1,"YES","hydriomena deltoidata","species",2.81,1
+"175",3,"TA3","NonNative","LT","22/12/2032","arthropoda","insecta",NA,"lepidoptera","geometridae",NA,NA,"hydriomena","hydriomena deltoidata",1,"YES","hydriomena deltoidata","species",2.81,1
+"176",3,"TA3","Native","LT","22/12/2042","arthropoda","insecta",NA,"lepidoptera","crambidae",NA,NA,"hygraula","hygraula nitens",1,"YES","hygraula nitens","species",3.41333333333333,3
+"177",3,"TA3","NonNative","LT","22/12/2025","arthropoda","insecta",NA,"lepidoptera","crambidae",NA,NA,"hygraula","hygraula nitens",8,"YES","hygraula nitens","species",2.81,1
+"178",3,"TA3","Native","LT","22/12/2042","arthropoda","insecta",NA,"lepidoptera",NA,NA,NA,NA,NA,2,"YES","lepidoptera","order",3.41333333333333,3
+"179",3,"TA3","Native","LT","22/12/2042","arthropoda","insecta",NA,"coleoptera","elateridae",NA,NA,"monocrepidius","monocrepidius exsul",1,"YES","monocrepidius exsul","species",3.41333333333333,3
+"180",3,"TA3","NonNative","LT","22/12/2033","arthropoda","insecta",NA,"lepidoptera",NA,NA,NA,NA,NA,1,"NO","lepidoptera","order",2.81,1
+"181",3,"TA3","Native","LT","22/12/2042","arthropoda","insecta",NA,"trichoptera",NA,NA,NA,NA,NA,1,"YES","trichoptera","order",3.41333333333333,3
+"182",3,"TA3","Native","LT","22/12/2042","arthropoda","insecta",NA,"diptera",NA,NA,NA,NA,NA,1,"YES","diptera","order",3.41333333333333,3
+"183",3,"TA3","NonNative","LT","22/12/2024","arthropoda","insecta",NA,"diptera",NA,NA,NA,NA,NA,2,"YES","diptera","order",2.81,1
+"184",3,"TA3","NonNative","LT","22/12/2024","arthropoda","insecta",NA,"trichoptera",NA,NA,NA,NA,NA,43,"YES","trichoptera","order",2.81,1
+"185",3,"TA3","NonNative","LT","22/12/2024","arthropoda","insecta",NA,"hymenoptera","ichneumonidae",NA,NA,"netelia","netelia ephippiata",1,"YES","netelia ephippiata","species",2.81,1
+"186",3,"TA3","NonNative","LT","22/12/2035","arthropoda","insecta",NA,"coleoptera","carabidae","platyninae","platynini","notagonum","notagonum submetallicum",1,"YES","notagonum submetallicum","species",2.81,1
+"187",3,"TA3","Native","LT","22/12/2042","arthropoda","insecta",NA,"coleoptera",NA,NA,NA,"odontria",NA,1,"YES","odontria","genus",3.41333333333333,3
+"188",3,"TA3","NonNative","LT","22/12/2024","arthropoda","insecta",NA,"lepidoptera","crambidae","crambinae","crambini","orocrambus","orocrambus flexuosellus",5,"YES","orocrambus flexuosellus","species",2.81,1
+"189",3,"TA3","NonNative","LT","22/12/2027","arthropoda","insecta",NA,"lepidoptera","geometridae",NA,NA,NA,NA,1,"YES","geometridae","family",2.81,1
+"190",3,"TA3","NonNative","LT","22/12/2037","arthropoda","insecta",NA,"coleoptera","carabidae",NA,NA,NA,NA,2,"YES","carabidae","family",2.81,1
+"191",3,"TA3","NonNative","LT","22/12/2039","arthropoda","insecta",NA,"lepidoptera","choreutidae",NA,NA,"tebenna","tebenna micalis",1,"YES","tebenna micalis","species",2.81,1
+"192",3,"TA3","Native","LT","22/12/2042","arthropoda","insecta",NA,"lepidoptera",NA,NA,NA,"wisiena",NA,5,"YES","wisiena","genus",3.41333333333333,3
+"193",3,"TA3","NonNative","LT","22/12/2024","arthropoda","insecta",NA,"lepidoptera",NA,NA,NA,"wisiena",NA,14,"YES","wisiena","genus",2.81,1
+"194",3,"TA3","NonNative","LT","22/12/2030","arthropoda","insecta",NA,"lepidoptera","geometridae",NA,NA,"xanthorhoe","xanthorhoe semifissata",1,"YES","xanthorhoe semifissata","species",2.81,1
+"195",3,"TA3","Field","LT","22/12/2024","arthropoda","insecta",NA,"lepidoptera","crambidae",NA,NA,"hygraula","hygraula nitens",1,"YES","hygraula nitens","species",0.72,0.1
+"196",3,"TA3","Field","LT","22/12/2024","arthropoda","insecta",NA,"coleoptera","scirtidae",NA,NA,NA,NA,1,"NO","scirtidae","family",0.72,0.1
+"197",3,"TA3","Field","LT","22/12/2024","arthropoda","insecta",NA,"diptera",NA,NA,NA,NA,NA,1,"YES","diptera","order",0.72,0.1
+"198",7,"MT7","Field","LT","22/12/2024","arthropoda","insecta",NA,"lepidoptera","crambidae",NA,NA,"hygraula","hygraula nitens",4,"YES","hygraula nitens","species",0.72,0.1
+"199",7,"MT7","Field","LT","22/12/2024","arthropoda","insecta",NA,"lepidoptera",NA,NA,NA,NA,NA,1,"YES","lepidoptera","order",0.72,0.1
+"200",7,"MT7","Field","LT","22/12/2024","arthropoda","insecta",NA,"diptera","chironimidae",NA,NA,NA,NA,10,"YES","chironimidae","family",0.72,0.1
+"201",7,"MT7","Field","LT","22/12/2024","arthropoda","insecta",NA,"trichoptera",NA,NA,NA,NA,NA,17,"YES","trichoptera","order",0.72,0.1
+"202",7,"MT7","NonNative","LT","22/12/2024","arthropoda","insecta",NA,"lepidoptera","crambidae",NA,NA,"hygraula","hygraula nitens",1,"YES","hygraula nitens","species",8.80333333333333,1.33333333333333
+"203",7,"MT7","NonNative","LT","22/12/2024","arthropoda","insecta",NA,"lepidoptera","crambidae",NA,NA,"hygraula","hygraula nitens",12,"YES","hygraula nitens","species",8.80333333333333,1.33333333333333
+"204",7,"MT7","NonNative","LT","22/12/2024","arthropoda","insecta",NA,"lepidoptera","noctuidae",NA,NA,"ichneutica","ichneutica atristriga",2,"YES","ichneutica atristriga","species",8.80333333333333,1.33333333333333
+"205",7,"MT7","NonNative","LT","22/12/2024","arthropoda","insecta",NA,"hymenoptera",NA,NA,NA,NA,NA,1,"NO","hymenoptera","order",8.80333333333333,1.33333333333333
+"206",7,"MT7","NonNative","LT","22/12/2024","arthropoda","insecta",NA,"lepidoptera",NA,NA,NA,NA,NA,1,"YES","lepidoptera","order",8.80333333333333,1.33333333333333
+"207",7,"MT7","NonNative","LT","22/12/2024","arthropoda","insecta",NA,"lepidoptera",NA,NA,NA,NA,NA,3,"NO","lepidoptera","order",8.80333333333333,1.33333333333333
+"208",7,"MT7","NonNative","LT","22/12/2024","arthropoda","insecta",NA,"diptera",NA,NA,NA,NA,NA,5,"YES","diptera","order",8.80333333333333,1.33333333333333
+"209",7,"MT7","NonNative","LT","22/12/2024","arthropoda","insecta",NA,"trichoptera",NA,NA,NA,NA,NA,14,"YES","trichoptera","order",8.80333333333333,1.33333333333333
+"210",5,"BA5","Native","LT","22/12/2024","arthropoda","insecta",NA,"diptera","muscidae",NA,NA,NA,NA,1,"YES","muscidae","family",3.46333333333333,2.66666666666667
