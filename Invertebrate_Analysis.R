@@ -193,7 +193,7 @@ light_hedge_data <- light_hedge_data %>%
 
 
 # Export the dataset as a csv for backup
-write.csv(light_hedge_data, "light_hedge_data")
+write.csv(light_hedge_data, "light_hedge_data") ### this has been moved to invert spreadsheet cleaning - test that, delete here, work on organizing by trap type for analysis
 
 #### building community matrices to account for zeros ####
 
@@ -251,6 +251,7 @@ long_pan %>%
   print(n = 40)
 
 long_pan %>% filter(abundance == 0) %>% nrow()
+
 #
 ##### Initial summaries#####
 ## Summarize by order and habitat type ##
@@ -354,3 +355,6 @@ ggplot(pitfall_orderXhab, aes(x = `Habitat Type`, y = TotalAbundance, fill = ord
   ) +
   theme_minimal()
 
+
+
+## merge with main branch and start new branch ###

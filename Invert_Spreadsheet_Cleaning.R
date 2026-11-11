@@ -65,11 +65,11 @@ light$abundance[is.na(light$abundance)] <- 0
 
 ## Transform pan to long format ##
 long_pan <- pan %>%
-    tidyr::pivot_longer(cols = -c(site_name, farm, region, trap_type, habitat_type), 
+    tidyr::pivot_longer(cols = -c(site_name, farm, region, trap_type, habitat_type, site_number), 
                names_to = "invert_type", 
                values_to = "abundance")
 
-pan %>% filter(is.na(`Site name`) | is.na(Farm) | is.na(Habitat_Type))
+
 
 ## Add a columns for taxonomic levels. This code can be updated for any additional columns that need to be added without overwriting the values that have been moved ##
 
@@ -528,13 +528,13 @@ light %>% count(LTU_rank, sort = TRUE)
 
 pitfall <- pitfall %>%
   mutate(across(
-    -c("site_name", "farm", "region", "trap_type", "habitat_type"),  # keep these as-is
+    -c("site_name", "farm", "region", "trap_type", "habitat_type", "site_number"),  # keep these as-is
     ~ suppressWarnings(as.numeric(.))
   ))
 
 long_pitfall <- pitfall %>%
   tidyr::pivot_longer(
-    cols = -c("site_name", "farm", "region", "trap_type", "habitat_type"),
+    cols = -c("site_name", "farm", "region", "trap_type", "habitat_type", "site_number"),
     names_to = "invert_type",
     values_to = "abundance"
   )
@@ -940,5 +940,188 @@ my_list <- list(
 )
 
 write_xlsx(my_list, "/Users/marybufordturnage/Library/CloudStorage/OneDrive-UniversityofCanterbury 2/PhD_General/Data/Data Spreadsheets/Chapter 2/Invert_Spreadsheets/Inverts_Data_R_Version.xlsx")
+
+#### Add in hedgerow data ####
+
+## Read in each sheet seperately - not sure if I actually need ot have the master in here ##
+long_pitfall <- read_excel('/Users/marybufordturnage/Library/CloudStorage/OneDrive-UniversityofCanterbury 2/PhD_General/Data/Data Spreadsheets/Chapter 2/Invert_Spreadsheets/Inverts_Data_R_Version.xlsx', sheet = "long_pitfall")
+light <- read_excel('/Users/marybufordturnage/Library/CloudStorage/OneDrive-UniversityofCanterbury 2/PhD_General/Data/Data Spreadsheets/Chapter 2/Invert_Spreadsheets/Inverts_Data_R_Version.xlsx', sheet = "light")
+long_pan <- read_excel('/Users/marybufordturnage/Library/CloudStorage/OneDrive-UniversityofCanterbury 2/PhD_General/Data/Data Spreadsheets/Chapter 2/Invert_Spreadsheets/Inverts_Data_R_Version.xlsx', sheet = "long_pan")
+
+# Convert to tibbles #
+long_pitfall<-as_tibble(long_pitfall)
+long_pitfall
+
+light<-as_tibble(light)
+light
+
+long_pan<-as_tibble(long_pan)
+long_pan
+
+hedge_data<-read.csv('/Users/marybufordturnage/Library/CloudStorage/OneDrive-UniversityofCanterbury 2/PhD_General/Data/Data Spreadsheets/Chapter 2/Invert_Spreadsheets/Hedgerows_Inverts.csv')
+head(hedge_data)
+
+hedge_data <- as_tibble(hedge_data)
+
+
+long_pan %>%
+  select(farm, habitat_type) %>%
+  distinct() %>%
+  arrange(farm, habitat_type) %>%
+  print(n = 50)
+
+
+
+#### Creating columns and calculating mean hedgerow heights ####
+hedge_data <- hedge_data %>%
+  mutate(                                                               # mutate() is used to add new columns or modify existing ones
+    mean_height = rowMeans(                                             # creates new column called mean_height, rowMeans calculates the mean across columns for each row 
+      select(., height_at_0m, height_at_25m, height_at_50m),            # select() picks specific columns from the tibble, "." refers to the data coming from hedge_tibble (the data frame for the call to focus on?)
+      na.rm = TRUE))                                                    # na.rm = TRUE ignores any missing or NA values when calculating the mean, if "na.rm = FALSE" and a value was "NA", the resulting mean would be "NA"
+
+# Creating columns and calculating mean canopy layers
+hedge_data <- hedge_data %>%
+  mutate(
+    mean_canopy_layers = rowMeans(
+      select(., vert_layers_0, vert_layers_25, vert_layers_50),
+      na.rm = TRUE
+    )
+  )
+
+# Prepping data sets for join - changing the names in 
+hedge_data <- hedge_data%>% 
+  dplyr::rename(
+    habitat_type = Type_of_Hedgerow,
+    farm = Farm                                                      # new_name = old_name pattern
+  ) %>%
+  dplyr::mutate(
+    habitat_type = case_when(                                         # changes values conditionally
+      habitat_type == "native" ~ "Native",
+      habitat_type == "nonnative" ~ "NonNative",
+      habitat_type == 'mix' ~ "Mix",
+      TRUE ~ habitat_type                                             # keep all other values unchanged
+    )
+  )
+
+
+
+
+# Join mean and mean canopy layers to each invert tibble
+
+# pitfall
+pitfall_hedge_data <- long_pitfall %>%
+  left_join(
+    hedge_data %>%
+      select(farm, habitat_type, mean_height, mean_canopy_layers),    # selects four columns from hedge_tibble, creates a smaller version of hedge tibble containing only those variables
+    by = c("farm", "habitat_type"),                                                                          # then joins long_pitfall to the smaller version of hedge_tibble, matches rows where Farm and Habitat_Type are the same in both tibbles
+    relationship = "many-to-many"                                                                            # tells R that its fine that there are multiple rows in long_pitfall that match each row in hedge_tibble
+  )
+
+# Convert bird_hedge_data back to a tibble
+pitfall_hedge_data <- as_tibble(pitfall_hedge_data)
+
+# Add values to fill NAs in the fence and field habitat types in mean_height and mean_canopy layers
+
+# Filling in values for fence and field heights #
+pitfall_hedge_data <- pitfall_hedge_data %>%
+  mutate(
+    mean_height = case_when(
+      habitat_type == "Fence" & is.na(mean_height) ~ 1,
+      habitat_type == "Field" & is.na(mean_height) ~ 0.72, 
+      TRUE ~ mean_height
+    )
+  )
+
+# Filling in values for fence and field canopy layers
+pitfall_hedge_data <- pitfall_hedge_data %>%
+  mutate(
+    mean_canopy_layers = case_when(
+      habitat_type == "Fence" & is.na(mean_canopy_layers) ~ 0.5,
+      habitat_type == "Field" & is.na(mean_canopy_layers) ~ 0.1,
+      TRUE ~ mean_canopy_layers
+    )
+  )
+
+
+# Export the dataset as a csv for backup
+write.csv(pitfall_hedge_data, "~/Library/CloudStorage/OneDrive-UniversityofCanterbury 2/PhD_General/Code/Chapter 2/Invertebrates_2024/Invertebrates_2024/pitfall_hedge_data.csv")
+
+
+
+# pan
+pan_hedge_data <- long_pan %>%
+  left_join(
+    hedge_data %>%
+      select(farm, habitat_type, mean_height, mean_canopy_layers),    
+    by = c("farm", "habitat_type"),                                                                          
+    relationship = "many-to-many"                                                                            
+  )
+
+# Convert bird_hedge_data back to a tibble
+pan_hedge_data <- as_tibble(pan_hedge_data)
+
+# Add values to fill NAs in the fence and field habitat types in mean_height and mean_canopy layers
+
+# Filling in values for fence and field heights #
+pan_hedge_data <- pan_hedge_data %>%
+  mutate(
+    mean_height = case_when(
+      habitat_type == "Fence" & is.na(mean_height) ~ 1,
+      habitat_type == "Field" & is.na(mean_height) ~ 0.72, 
+      TRUE ~ mean_height
+    )
+  )
+
+# Filling in values for fence and field canopy layers
+pan_hedge_data <- pan_hedge_data %>%
+  mutate(
+    mean_canopy_layers = case_when(
+      habitat_type == "Fence" & is.na(mean_canopy_layers) ~ 0.5,
+      habitat_type == "Field" & is.na(mean_canopy_layers) ~ 0.1,
+      TRUE ~ mean_canopy_layers
+    )
+  )
+
+
+# Export the dataset as a csv for backup
+write.csv(pan_hedge_data, "~/Library/CloudStorage/OneDrive-UniversityofCanterbury 2/PhD_General/Code/Chapter 2/Invertebrates_2024/Invertebrates_2024/pan_hedge_data.csv")
+
+# light
+light_hedge_data <- light %>%
+  left_join(
+    hedge_data %>%
+      select(farm, habitat_type, mean_height, mean_canopy_layers),    
+    by = c("farm", "habitat_type"),                                                                          
+    relationship = "many-to-many"                                                                            
+  )
+
+# Convert bird_hedge_data back to a tibble
+light_hedge_data <- as_tibble(light_hedge_data)
+
+# Add values to fill NAs in the fence and field habitat types in mean_height and mean_canopy layers
+
+# Filling in values for fence and field heights #
+light_hedge_data <- light_hedge_data %>%
+  mutate(
+    mean_height = case_when(
+      habitat_type == "Fence" & is.na(mean_height) ~ 1,
+      habitat_type == "Field" & is.na(mean_height) ~ 0.72, 
+      TRUE ~ mean_height
+    )
+  )
+
+# Filling in values for fence and field canopy layers
+light_hedge_data <- light_hedge_data %>%
+  mutate(
+    mean_canopy_layers = case_when(
+      habitat_type == "Fence" & is.na(mean_canopy_layers) ~ 0.5,
+      habitat_type == "Field" & is.na(mean_canopy_layers) ~ 0.1,
+      TRUE ~ mean_canopy_layers
+    )
+  )
+
+
+# Export the dataset as a csv for backup
+write.csv(light_hedge_data, "~/Library/CloudStorage/OneDrive-UniversityofCanterbury 2/PhD_General/Code/Chapter 2/Invertebrates_2024/Invertebrates_2024/light_hedge_data.csv")
 
 
